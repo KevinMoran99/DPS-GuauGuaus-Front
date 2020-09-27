@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "DPS-GuauGuaus-Front"
+  "defaultProject": "DPS-GuauGuaus-Front",
+  "cli": {
+    "analytics": "e02bb936-c3f8-4d5f-aa48-8aacec631bd6"
+  }
 }
