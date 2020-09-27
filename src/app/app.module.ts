@@ -18,6 +18,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CitasComponent } from './components/citas/citas.component';
@@ -25,6 +26,7 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { PermisosComponent } from './components/permisos/permisos.component';
 import { EspeciesComponent } from './components/especies/especies.component';
 import { AboutComponent } from './components/about/about.component';
+
 
 
 
@@ -56,7 +58,8 @@ import { AboutComponent } from './components/about/about.component';
     MatMenuModule,
     MatSnackBarModule,
     MatSlideToggleModule,
-    FormsModule
+    FormsModule,
+    MatDividerModule
     
   ],
   providers: [],

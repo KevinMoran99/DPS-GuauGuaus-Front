@@ -3,12 +3,21 @@
 }
 
 .sidenav {
-  width: 200px;
-  background-color: #27a037;
+  width: 220px;
 }
 
-.sidenav .mat-toolbar {
-  background: #27a037;
+.header {
+  width: 100%;
+}
+
+.header-container{
+  margin: 16px;
+}
+
+.absolute {
+  position: absolute;
+  left: 0;
+  bottom: 0;
 }
 
 .mat-toolbar.mat-primary {
@@ -17,15 +26,24 @@
   z-index: 1;
 }
 
-.mat-nav-list{
+.mat-nav-list {
   color: white;
   background-color: white;
   height: 585px;
 }
 
-.toolbar{
+.toolbar {
   color: white;
   background-color: white;
   display: flex;
   justify-content: center;
+}
+
+#username{
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+#avatar{
+  margin-bottom: 10px;
 }
