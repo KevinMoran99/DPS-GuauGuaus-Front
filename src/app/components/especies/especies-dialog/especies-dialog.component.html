@@ -1,0 +1,20 @@
+<mat-progress-bar *ngIf="isSending" mode="indeterminate"></mat-progress-bar>
+<h2 mat-dialog-title>{{title}}</h2>
+    <form [formGroup]="specieForm">
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre de especie</mat-label>
+                <input matInput formControlName="name">
+            </mat-form-field>
+            <mat-radio-group formControlName="state">
+            <label>Estado: </label>
+              <mat-radio-button value="1" checked>Activo</mat-radio-button>
+              <mat-radio-button value="0">Inactivo</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <mat-dialog-actions>
+            <button mat-raised-button color="error" (click)="close()">Cancelar</button>
+            <button type="submit" mat-raised-button color="primary" (click)="send()" [disabled]="!specieForm.valid">Enviar</button>
+        </mat-dialog-actions>
+    </form>
+

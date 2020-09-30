@@ -7,7 +7,6 @@ import { EspeciesComponent } from './components/especies/especies.component';
 import { PermisosComponent } from './components/permisos/permisos.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 
-
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
   {path: 'citas', component: CitasComponent},

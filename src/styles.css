@@ -1,4 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #e2e2e2;}
+table{
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+mat-progress-bar{
+    margin-top: 10px;
+}
+mat-dialog-actions{
+    justify-content: flex-end;
+}
+.container{
+    width: 100%;
+}
+.title{
+    font-size: 1.8em;
+    margin-left: 50px;
+}
+.mat-header-cell{
+    background-color:#66BB6A;
+    color: white !important;
+}
+
+.fav-icon{
+    top: auto !important;
+    right: 40px !important;
+    bottom: 20px !important;
+    left: auto !important;
+    position: fixed !important;
+}
+
+.edit{
+    width: 25px;
+}
