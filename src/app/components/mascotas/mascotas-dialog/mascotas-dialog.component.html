@@ -1,0 +1,68 @@
+<mat-progress-bar *ngIf="isSending" mode="indeterminate"></mat-progress-bar>
+<h2 mat-dialog-title>{{title}}</h2>
+    <form [formGroup]="petForm">
+        <mat-dialog-content>
+            <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile [rowspan]="3" [colspan]="1">
+                    <input-file placeholder="Foto" formControlName="photo"></input-file> 
+                </mat-grid-tile>
+                <mat-grid-tile [rowspan]="1" [colspan]="1">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Nombre de mascota</mat-label>
+                        <input matInput formControlName="name">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [rowspan]="1" [colspan]="1">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Dueño</mat-label>
+                        <mat-select formControlName="owner_id">
+                          <mat-option *ngFor="let specie of species" [value]="specie.id">
+                            {{specie.name}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [rowspan]="1" [colspan]="1">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Especie</mat-label>
+                        <mat-select formControlName="species_id">
+                          <mat-option *ngFor="let specie of species" [value]="specie.id">
+                            {{specie.name}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [rowspan]="1" [colspan]="1">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Peso en libras</mat-label>
+                        <input matInput type="number" min=0 formControlName="weight">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [rowspan]="1" [colspan]="1">
+                    <mat-form-field >
+                        <mat-label>Fecha de nacimiento</mat-label>
+                        <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="birthday">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [rowspan]="1" [colspan]="1">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Altura en centímetros</mat-label>
+                        <input matInput type="number" min=0 formControlName="height">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [rowspan]="1" [colspan]="1">
+                    <mat-radio-group formControlName="state">
+                    <label>Estado: </label>
+                      <mat-radio-button value="1" checked>Activo</mat-radio-button>
+                      <mat-radio-button value="0">Inactivo</mat-radio-button>
+                    </mat-radio-group>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-dialog-content>
+          <mat-dialog-actions>
+            <button mat-raised-button color="error" (click)="close()">Cancelar</button>
+            <button type="submit" mat-raised-button color="primary" (click)="send()" [disabled]="!petForm.valid">Enviar</button>
+        </mat-dialog-actions>
+    </form>

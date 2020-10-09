@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AboutComponent } from './components/about/about.component';
+import { MascotasComponent } from './components/mascotas/mascotas.component';
 import { CitasComponent } from './components/citas/citas.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EspeciesComponent } from './components/especies/especies.component';
@@ -9,6 +10,7 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
+  {path: 'mascotas', component: MascotasComponent},
   {path: 'citas', component: CitasComponent},
   {path: 'usuarios', component: UsuariosComponent},
   {path: 'permisos', component: PermisosComponent},

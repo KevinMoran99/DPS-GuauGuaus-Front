@@ -52,23 +52,23 @@ export class EspeciesDialogComponent implements OnInit {
       //post
       this.speciesService.post(this.specie).subscribe(
         result => {
-          this.openSnackBar("Ingresado con exito", "Cerrar");
+          this.openSnackBar("Ingresado con éxito", "Cerrar");
           this.dialogRef.close();
       },
       error=>{
-        this.openSnackBar("Ocurrio un error al ingresar especie", "Cerrar");
+        this.openSnackBar("Ocurrió un error al ingresar la especie", "Cerrar");
       }
       );
     }else{
       //put
       this.speciesService.put(this.specie).subscribe(
         result => {
-          this.openSnackBar("Actualizado con exito", "Cerrar");
+          this.openSnackBar("Actualizado con éxito", "Cerrar");
           this.dialogRef.close();
           
       },
       error=>{
-        this.openSnackBar("Ocurrio un error al actualizar especie", "Cerrar");
+        this.openSnackBar("Ocurrio un error al actualizar la especie", "Cerrar");
       }
       );
     }

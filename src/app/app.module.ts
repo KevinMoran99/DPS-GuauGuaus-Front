@@ -26,6 +26,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { InputFileConfig, InputFileModule } from 'ngx-input-file';
 //components
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -35,6 +39,13 @@ import { PermisosComponent } from './components/permisos/permisos.component';
 import { EspeciesComponent } from './components/especies/especies.component';
 import { AboutComponent } from './components/about/about.component';
 import { EspeciesDialogComponent } from './components/especies/especies-dialog/especies-dialog.component';
+import { MascotasComponent } from './components/mascotas/mascotas.component';
+import { MascotasDialogComponent } from './components/mascotas/mascotas-dialog/mascotas-dialog.component';
+
+//imagepicker config
+const config: InputFileConfig = {
+  fileAccept: 'image/*'
+};
 
 @NgModule({
   declarations: [
@@ -46,7 +57,9 @@ import { EspeciesDialogComponent } from './components/especies/especies-dialog/e
     PermisosComponent,
     EspeciesComponent,
     AboutComponent,
-    EspeciesDialogComponent
+    EspeciesDialogComponent,
+    MascotasComponent,
+    MascotasDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +85,11 @@ import { EspeciesDialogComponent } from './components/especies/especies-dialog/e
     MatProgressBarModule,
     MatRadioModule,
     MatInputModule,
-    ReactiveFormsModule 
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    InputFileModule.forRoot(config),
   ],
   providers: [],
   bootstrap: [AppComponent]
