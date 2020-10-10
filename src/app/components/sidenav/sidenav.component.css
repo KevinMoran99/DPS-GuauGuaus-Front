@@ -16,6 +16,7 @@
 
 .absolute {
   position: absolute;
+  width: 92%;
   left: 0;
   bottom: 0;
 }
