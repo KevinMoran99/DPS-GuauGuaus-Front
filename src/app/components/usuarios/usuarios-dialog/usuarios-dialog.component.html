@@ -1,0 +1,65 @@
+<mat-progress-bar *ngIf="isSending" mode="indeterminate"></mat-progress-bar>
+<h2 mat-dialog-title>{{title}}</h2>
+    <form [formGroup]="userForm">
+        <mat-dialog-content>
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="name">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Apellido</mat-label>
+                <input matInput formControlName="lastname">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Correo electrónico</mat-label>
+                <input type="email" matInput formControlName="email">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>DUI</mat-label>
+                <input matInput formControlName="dui" pattern="^[0-9]{8}[-][0-9]{1}$">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Teléfono</mat-label>
+                <input matInput formControlName="phone" pattern="^[267]{1}[0-9]{7}$">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Dirección</mat-label>
+                <textarea matInput formControlName="name"></textarea>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Contraseña</mat-label>
+                <input type="password" matInput formControlName="password">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Repetir contraseña</mat-label>
+                <input type="password" matInput formControlName="passwordConfirm">
+            </mat-form-field>
+            <br>
+            <mat-grid-tile [rowspan]="1" [colspan]="1">
+                <mat-form-field appearance="fill">
+                    <mat-label>Dueño</mat-label>
+                    <mat-select formControlName="owner_id">
+                      <mat-option *ngFor="let type of typeUser" [value]="type">
+                        {{type}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-radio-group formControlName="state">
+            <label>Estado: </label>
+              <mat-radio-button value="1" checked>Activo</mat-radio-button>
+              <mat-radio-button value="0">Inactivo</mat-radio-button>
+            </mat-radio-group>
+          </mat-dialog-content>
+          <mat-dialog-actions>
+            <button mat-raised-button color="error" (click)="close()">Cancelar</button>
+            <button type="submit" mat-raised-button color="primary" (click)="send()" [disabled]="!userForm.valid">Enviar</button>
+        </mat-dialog-actions>
+    </form>

@@ -11,10 +11,16 @@ export const ModalSettings = {
         title: 'Agregar mascota',
         disableClose: true
     },
+    usuariosAddSettings: {
+        height: 'auto',
+        width: '800px',
+        title: 'Agregar usuario',
+        disableClose: true
+    },
     condicionMedicaAddSettings: {
         height: 'auto',
         width: '800px',
-        title: 'Agregar condicion medica',
+        title: 'Agregar condición médica',
         disableClose: true
     },
     tipoCitaAddSettings: {

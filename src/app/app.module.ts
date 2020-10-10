@@ -45,6 +45,9 @@ import { TiposCitaComponent } from './components/tipos-cita/tipos-cita.component
 import { TiposCitaDialogComponent } from './components/tipos-cita/tipos-cita-dialog/tipos-cita-dialog.component';
 import { CondicionMedicaComponent } from './components/condicion-medica/condicion-medica.component';
 import { CondicionMedicaDialogComponent } from './components/condicion-medica/condicion-medica-dialog/condicion-medica-dialog.component';
+import { UsuariosDialogComponent } from './components/usuarios/usuarios-dialog/usuarios-dialog.component';
+import { UsuariosMenuComponent } from './components/usuarios/usuarios-menu/usuarios-menu.component';
+import { UsuariosMascotasComponent } from './components/usuarios/usuarios-mascotas/usuarios-mascotas.component';
 
 //imagepicker config
 const config: InputFileConfig = {
@@ -67,7 +70,10 @@ const config: InputFileConfig = {
     TiposCitaComponent,
     TiposCitaDialogComponent,
     CondicionMedicaComponent,
-    CondicionMedicaDialogComponent
+    CondicionMedicaDialogComponent,
+    UsuariosDialogComponent,
+    UsuariosMenuComponent,
+    UsuariosMascotasComponent
   ],
   imports: [
     BrowserModule,
