@@ -9,6 +9,7 @@ import { PermisosComponent } from './components/permisos/permisos.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { CondicionMedicaComponent } from './components/condicion-medica/condicion-medica.component';
 import { TiposCitaComponent } from './components/tipos-cita/tipos-cita.component';
+import { TipoUsuarioComponent } from './components/tipo-usuario/tipo-usuario.component';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path: 'especies', component: EspeciesComponent},
   {path: 'about', component: AboutComponent},
   {path: 'condicion-medica', component: CondicionMedicaComponent},
-  {path: 'tipo-citas', component: TiposCitaComponent}
+  {path: 'tipo-citas', component: TiposCitaComponent},
+  {path: 'tipo-usuarios', component: TipoUsuarioComponent}
 ];
 
 @NgModule({
