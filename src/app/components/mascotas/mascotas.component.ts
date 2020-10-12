@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Pet } from '../../models/pet.model';
-import { Specie } from '../../models/specie.model';
 //from here we get the data
 import { PetsService } from '../../services/pets.service';
-import { SpeciesService } from '../../services/species.service';
 import { MascotasDialogComponent } from './mascotas-dialog/mascotas-dialog.component';
 //here are stored all our modal settings
 import { ModalSettings } from '../../helpers/settings';
