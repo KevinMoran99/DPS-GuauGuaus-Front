@@ -1,0 +1,21 @@
+<mat-progress-bar *ngIf="isSending" mode="indeterminate"></mat-progress-bar>
+<h2 mat-dialog-title>{{title}}</h2>
+    <form [formGroup]="userTypeForm">
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre de tipo de usuario</mat-label>
+                <input matInput formControlName="name">
+            </mat-form-field>
+            <br>
+            <mat-radio-group formControlName="state">
+            <label>Estado: </label>
+              <mat-radio-button value="1" checked>Activo</mat-radio-button>
+              <mat-radio-button value="0">Inactivo</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <mat-dialog-actions>
+            <button mat-raised-button color="error" (click)="close()">Cancelar</button>
+            <button type="submit" mat-raised-button color="primary" (click)="send()" [disabled]="!userTypeForm.valid">Enviar</button>
+        </mat-dialog-actions>
+    </form>
+

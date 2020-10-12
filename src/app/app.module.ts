@@ -48,6 +48,8 @@ import { CondicionMedicaDialogComponent } from './components/condicion-medica/co
 import { UsuariosDialogComponent } from './components/usuarios/usuarios-dialog/usuarios-dialog.component';
 import { UsuariosMenuComponent } from './components/usuarios/usuarios-menu/usuarios-menu.component';
 import { UsuariosMascotasComponent } from './components/usuarios/usuarios-mascotas/usuarios-mascotas.component';
+import { TipoUsuarioComponent } from './components/tipo-usuario/tipo-usuario.component';
+import { TipoUsuarioDialogComponent } from './components/tipo-usuario/tipo-usuario-dialog/tipo-usuario-dialog.component';
 
 //imagepicker config
 const config: InputFileConfig = {
@@ -73,7 +75,9 @@ const config: InputFileConfig = {
     CondicionMedicaDialogComponent,
     UsuariosDialogComponent,
     UsuariosMenuComponent,
-    UsuariosMascotasComponent
+    UsuariosMascotasComponent,
+    TipoUsuarioComponent,
+    TipoUsuarioDialogComponent
   ],
   imports: [
     BrowserModule,
