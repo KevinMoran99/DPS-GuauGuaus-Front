@@ -8,7 +8,7 @@ import { AppointmentTypes } from '../models/appointment-types.model';
 })
 export class AppointmentTypesService {
 
-  endpoint:string = "appointment-types";
+  endpoint:string = "appointmenttypes";
 
   constructor(
     private http: HttpClient 

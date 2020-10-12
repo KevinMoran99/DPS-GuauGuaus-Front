@@ -8,7 +8,7 @@ import { MedicalCondition } from '../models/medical-condition.model';
 })
 export class MedicalConditionsService {
 
-  endpoint:string = "medical-conditions";
+  endpoint:string = "medicalconditions";
 
   constructor(
     private http: HttpClient 
