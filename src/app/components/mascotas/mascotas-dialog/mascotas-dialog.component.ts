@@ -7,6 +7,8 @@ import { Pet } from 'src/app/models/pet.model';
 import { PetsService } from 'src/app/services/pets.service';
 import { Specie } from 'src/app/models/specie.model';
 import { SpeciesService } from 'src/app/services/species.service';
+import { User } from 'src/app/models/user.model';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-mascotas-dialog',
@@ -36,12 +38,14 @@ export class MascotasDialogComponent implements OnInit {
   maxDate: Date = new Date();
 
   species: Specie[];
+  users: User[];
 
   constructor(
     public dialogRef: MatDialogRef<MascotasDialogComponent>, 
     private formBuilder: FormBuilder,
     private petsService: PetsService,
     private speciesService: SpeciesService,
+    private usersService: UsersService,
     private _snackBar: MatSnackBar
   ) { }
 
@@ -54,6 +58,14 @@ export class MascotasDialogComponent implements OnInit {
       }, error=>{
         if(error.status == 404){
           alert("Error al obtener los datos de especies del servidor");
+      }
+    });
+    this.usersService.getAll().subscribe(
+      result => {
+        this.users = result as User[];
+      }, error=>{
+        if(error.status == 404){
+          alert("Error al obtener los datos de usuarios del servidor");
       }
     });
 
@@ -81,13 +93,16 @@ export class MascotasDialogComponent implements OnInit {
     catch {
       this.pet.birthday = this.petForm.controls['birthday'].value;
     }
-    this.pet.photo = /*this.petForm.controls['photo'].value*/"N/A";
+    let photoPrev = this.petForm.controls['photo'].value[0].preview.split(",");
+    this.pet.photo = photoPrev[1];
     this.pet.weight = (this.petForm.controls['weight'].value).toFixed(2);
     this.pet.height = (this.petForm.controls['height'].value).toFixed(2);
     this.pet.state = this.petForm.controls['state'].value;
     this.pet.species_id = this.petForm.controls['species_id'].value;
     this.pet.owner_id = this.petForm.controls['owner_id'].value;
 
+    console.log(this.pet)
+/*
     if(this.pet.id == undefined){
       //post
       this.petsService.post(this.pet).subscribe(
@@ -111,7 +126,7 @@ export class MascotasDialogComponent implements OnInit {
         this.openSnackBar("Ocurrio un error al actualizar la mascota", "Cerrar");
       }
       );
-    }
+    }*/
   }
   //exit the modal
   close(){
