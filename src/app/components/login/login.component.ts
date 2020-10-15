@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { auth } from 'firebase';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,13 +13,16 @@ export class LoginComponent implements OnInit {
   email: string;
   password: string;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private router:Router
+    ) { }
 
   ngOnInit(): void {
+    this.authService.logIn ? this.router.navigate(['']) : "";
   }
 
   login() {
-  console.log("entraste")
   this.authService.login(this.email, this.password)
   }
 

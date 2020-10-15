@@ -15,18 +15,27 @@ import { AuthGuard } from './guards/auth.guard';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 const routes: Routes = [
-  {path: '', component: SidenavComponent, canActivate: [AuthGuard]},
-  {path: 'login', component: LoginComponent},
-  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-  {path: 'mascotas', component: MascotasComponent, canActivate: [AuthGuard]},
-  {path: 'citas', component: CitasComponent, canActivate: [AuthGuard]},
-  {path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard]},
-  {path: 'permisos', component: PermisosComponent, canActivate: [AuthGuard]},
-  {path: 'especies', component: EspeciesComponent, canActivate: [AuthGuard]},
-  {path: 'about', component: AboutComponent, canActivate: [AuthGuard]},
-  {path: 'condicion-medica', component: CondicionMedicaComponent, canActivate: [AuthGuard]},
-  {path: 'tipo-citas', component: TiposCitaComponent, canActivate: [AuthGuard]},
-  {path: 'tipo-usuarios', component: TipoUsuarioComponent, canActivate: [AuthGuard]},
+  {
+    path: 'login', 
+    component: LoginComponent
+  },  
+  {
+    path: '', 
+    component: SidenavComponent, 
+    canActivate: [AuthGuard], 
+    children: [
+      {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+      {path: 'mascotas', component: MascotasComponent, canActivate: [AuthGuard]},
+      {path: 'citas', component: CitasComponent, canActivate: [AuthGuard]},
+      {path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard]},
+      {path: 'permisos', component: PermisosComponent, canActivate: [AuthGuard]},
+      {path: 'especies', component: EspeciesComponent, canActivate: [AuthGuard]},
+      {path: 'about', component: AboutComponent, canActivate: [AuthGuard]},
+      {path: 'condicion-medica', component: CondicionMedicaComponent, canActivate: [AuthGuard]},
+      {path: 'tipo-citas', component: TiposCitaComponent, canActivate: [AuthGuard]},
+      {path: 'tipo-usuarios', component: TipoUsuarioComponent, canActivate: [AuthGuard]}
+    ]
+  },
   { path: '**', redirectTo: ''} 
 ];
 
