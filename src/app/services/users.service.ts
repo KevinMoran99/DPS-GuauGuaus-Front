@@ -23,4 +23,8 @@ export class UsersService {
   put(user: User){
     return this.http.put(environment.baseUrl+this.endpoint,user);
   }
+
+  login(user: User){
+    return this.http.post("http://104.197.18.35/DPS-GuauGuaus-Back/public/login", user);
+  }
 }

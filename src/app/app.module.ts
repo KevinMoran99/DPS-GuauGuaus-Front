@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 //Angular material
 import {SidenavComponent } from './components/sidenav/sidenav.component';
@@ -50,6 +51,9 @@ import { UsuariosMenuComponent } from './components/usuarios/usuarios-menu/usuar
 import { UsuariosMascotasComponent } from './components/usuarios/usuarios-mascotas/usuarios-mascotas.component';
 import { TipoUsuarioComponent } from './components/tipo-usuario/tipo-usuario.component';
 import { TipoUsuarioDialogComponent } from './components/tipo-usuario/tipo-usuario-dialog/tipo-usuario-dialog.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthService } from './services/auth.service'
+import { AuthGuard } from './guards/auth.guard';
 
 //imagepicker config
 const config: InputFileConfig = {
@@ -77,7 +81,9 @@ const config: InputFileConfig = {
     UsuariosMenuComponent,
     UsuariosMascotasComponent,
     TipoUsuarioComponent,
-    TipoUsuarioDialogComponent
+    TipoUsuarioDialogComponent,
+    LoginComponent
+   
   ],
   imports: [
     BrowserModule,
@@ -109,7 +115,10 @@ const config: InputFileConfig = {
     MatSelectModule,
     InputFileModule.forRoot(config),
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

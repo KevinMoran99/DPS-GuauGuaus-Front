@@ -1,5 +1,5 @@
 <mat-card style="display: none"></mat-card>
-<mat-sidenav-container class="sidenav-container mat-app-background">
+<mat-sidenav-container class="sidenav-container mat-app-background" *ngIf="isLoggedIn$ | async as isLoggedIn">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <div class="header">
@@ -23,7 +23,7 @@
       <div class="absolute">
         <mat-divider></mat-divider>
         <a mat-list-item routerLink="/about">Acerca de</a>
-        <a mat-list-item routerLink="#">Salir</a>
+        <a mat-list-item (click)="onLogout()" *ngIf="isLoggedIn">Salir</a>
       </div>
     </mat-nav-list>
   </mat-sidenav>
