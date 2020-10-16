@@ -8,6 +8,7 @@ import { User } from '../models/user.model';
 })
 export class UsersService {
   endpoint:string = "users"
+  modifier:string = ""
 
   constructor(
     private http: HttpClient
@@ -15,6 +16,10 @@ export class UsersService {
 
   getAll(){
     return this.http.get(environment.baseUrl+this.endpoint);
+  }
+  getActive(){
+    this.modifier = "/active";
+    return this.http.get(environment.baseUrl+this.endpoint+this.modifier);
   }
   post(user: User) {
     return this.http.post(environment.baseUrl+this.endpoint,user);

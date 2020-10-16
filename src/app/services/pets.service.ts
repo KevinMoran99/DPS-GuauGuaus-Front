@@ -8,6 +8,7 @@ import { Pet } from '../models/pet.model';
 })
 export class PetsService {
   endpoint:string = "pets"
+  modifier:string = "";
 
   constructor(
     private http: HttpClient
@@ -16,12 +17,15 @@ export class PetsService {
   getAll(){
     return this.http.get(environment.baseUrl+this.endpoint);
   }
+  getActive(){
+    this.modifier = "/active";
+    return this.http.get(environment.baseUrl+this.endpoint+this.modifier);
+  }
   post(pet: Pet) {
     return this.http.post(environment.baseUrl+this.endpoint,pet);
   }
 
   put(pet: Pet){
-    
     return this.http.put(environment.baseUrl+this.endpoint,pet);
   }
 }
