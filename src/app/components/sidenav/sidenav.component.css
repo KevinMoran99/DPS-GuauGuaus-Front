@@ -47,6 +47,11 @@
   font-weight: bold;
 }
 
+#email{
+  font-size: 0.7em;
+  font-weight: bold;
+}
+
 #avatar{
   margin-bottom: 10px;
 }

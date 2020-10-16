@@ -71,18 +71,20 @@ export class AuthService {
   // Lógica de autenticación para ejecutar cualquier proveedor de autenticación  
   AuthLogin(provider) {
     return this.afAuth.signInWithPopup(provider).then((result) => {
-       this.ngZone.run(() => {
+       //this.ngZone.run(() => {
+        console.log(result.user.email+" "+result.user.displayName);
+        this.http.post(this.uri + '/socials', {email: result.user.email, name: result.user.displayName}).subscribe((resp: any) => {
         this.loggedIn.next(true);
         this.location.replaceState('/');
         this.router.navigate(['']);
-        localStorage.setItem('auth', JSON.stringify(this.userData));
-        })
-      this.SetUserData(result.user);
+        localStorage.setItem('auth', JSON.stringify(resp));
+        }) 
+        //})
+      //this.SetUserData(result.user);
     }).catch((error) => {
       window.alert(error)
     })
   }
-
 
   /* Configurar datos de usuario al iniciar sesión con nombre de usuario / contraseña,
   registrarse con nombre de usuario / contraseña e iniciar sesión con autenticación social
