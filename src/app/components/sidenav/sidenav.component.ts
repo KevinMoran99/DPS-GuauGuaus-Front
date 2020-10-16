@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { User } from 'src/app/models/user.model';
+import { Userl } from 'src/app/models/userl';
 
 @Component({
   selector: 'app-sidenav',
@@ -12,6 +13,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class SidenavComponent  {
   user:User;
+  userl:Userl;
   isLoggedIn$: Observable<boolean>;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe( 
@@ -24,6 +26,7 @@ export class SidenavComponent  {
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn;
     this.user = JSON.parse(localStorage.getItem('auth'));
+    this.userl = JSON.parse(localStorage.getItem('auth'));
     console.table(this.user)
   }
 

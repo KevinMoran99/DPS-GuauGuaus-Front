@@ -55,6 +55,12 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth.service'
 import { AuthGuard } from './guards/auth.guard';
 
+// Firebase services
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+
 //imagepicker config
 const config: InputFileConfig = {
   fileAccept: 'image/*'
@@ -114,6 +120,10 @@ const config: InputFileConfig = {
     ReactiveFormsModule,
     MatSelectModule,
     InputFileModule.forRoot(config),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+
   ],
   providers: [
     AuthService,
