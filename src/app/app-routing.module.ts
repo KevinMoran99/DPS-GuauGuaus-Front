@@ -10,18 +10,33 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { CondicionMedicaComponent } from './components/condicion-medica/condicion-medica.component';
 import { TiposCitaComponent } from './components/tipos-cita/tipos-cita.component';
 import { TipoUsuarioComponent } from './components/tipo-usuario/tipo-usuario.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 const routes: Routes = [
-  {path: 'dashboard', component: DashboardComponent},
-  {path: 'mascotas', component: MascotasComponent},
-  {path: 'citas', component: CitasComponent},
-  {path: 'usuarios', component: UsuariosComponent},
-  {path: 'permisos', component: PermisosComponent},
-  {path: 'especies', component: EspeciesComponent},
-  {path: 'about', component: AboutComponent},
-  {path: 'condicion-medica', component: CondicionMedicaComponent},
-  {path: 'tipo-citas', component: TiposCitaComponent},
-  {path: 'tipo-usuarios', component: TipoUsuarioComponent}
+  {
+    path: 'login', 
+    component: LoginComponent
+  },  
+  {
+    path: '', 
+    component: SidenavComponent, 
+    canActivate: [AuthGuard], 
+    children: [
+      {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+      {path: 'mascotas', component: MascotasComponent, canActivate: [AuthGuard]},
+      {path: 'citas', component: CitasComponent, canActivate: [AuthGuard]},
+      {path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard]},
+      {path: 'permisos', component: PermisosComponent, canActivate: [AuthGuard]},
+      {path: 'especies', component: EspeciesComponent, canActivate: [AuthGuard]},
+      {path: 'about', component: AboutComponent, canActivate: [AuthGuard]},
+      {path: 'condicion-medica', component: CondicionMedicaComponent, canActivate: [AuthGuard]},
+      {path: 'tipo-citas', component: TiposCitaComponent, canActivate: [AuthGuard]},
+      {path: 'tipo-usuarios', component: TipoUsuarioComponent, canActivate: [AuthGuard]}
+    ]
+  },
+  { path: '**', redirectTo: ''} 
 ];
 
 @NgModule({
