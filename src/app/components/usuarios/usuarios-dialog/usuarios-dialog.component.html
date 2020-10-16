@@ -33,6 +33,15 @@
             </mat-form-field>
             <br>
             <mat-form-field appearance="fill">
+                <mat-label>Tipo de usuario</mat-label>
+                <mat-select formControlName="type_user_id">
+                    <mat-option *ngFor="let type of userTypes" [value]="type.id">
+                    {{type.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
                 <mat-label>Contraseña</mat-label>
                 <input type="password" matInput formControlName="password">
             </mat-form-field>
@@ -42,14 +51,6 @@
                 <input type="password" matInput formControlName="passwordConfirm">
             </mat-form-field>
             <br>
-            <mat-form-field appearance="fill">
-                <mat-label>Tipo de usuario</mat-label>
-                <mat-select formControlName="type_user_id">
-                    <mat-option *ngFor="let type of typeUser" [value]="type.id">
-                    {{type.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
             <mat-radio-group formControlName="state">
               <label>Estado: </label>
               <mat-radio-button value="1" checked>Activo</mat-radio-button>

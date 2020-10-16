@@ -5,8 +5,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 //imports to post/put
 import { User } from 'src/app/models/user.model';
 import { UsersService } from 'src/app/services/users.service';
-//import { TypeUser } from 'src/app/models/typeUser.model';
-//import { TypeUserService } from 'src/app/services/typeUser.service';
+import { UserType } from 'src/app/models/user-type.model';
+import { UserTypesService } from 'src/app/services/user-types.service';
+import { isEmpty } from 'rxjs/operators';
 
 @Component({
   selector: 'app-usuarios-dialog',
@@ -25,36 +26,35 @@ export class UsuariosDialogComponent implements OnInit {
     name: [, { validators: [Validators.required, Validators.minLength(3), Validators.maxLength(50)], updateOn: "change" }],
     lastname: [, {validators: [Validators.required, Validators.minLength(3), Validators.maxLength(50)]}],
     email: [, {validators: [Validators.required, Validators.email, Validators.maxLength(50)]}],
-    password: [, {validators: [Validators.required]}],
-    passwordConfirm: [, {validators: [Validators.required]}],
+    password: [, {validators: [Validators.minLength(4)]}],
+    passwordConfirm: [, {validators: [Validators.minLength(4)]}],
     dui: [, {validators: [Validators.required]}],
-    address: [, {validators: [Validators.required]}],
+    address: [, {validators: [Validators.required, Validators.minLength(5)]}],
     phone: [, {validators: [Validators.required]}],
-    type_user_id: [, {/*validators: [Validators.required]*/}],
+    type_user_id: [, {validators: [Validators.required]}],
     state: ["1", {validators: [Validators.required]}],
   });
 
-  //typeUser: typeUser[];
-  typeUser: User[];
+  userTypes: UserType[];
 
   constructor(
     public dialogRef: MatDialogRef<UsuariosDialogComponent>, 
     private formBuilder: FormBuilder,
     private usersService: UsersService,
-    //private typeUsersService: TypeUsersService,
+    private userTypesService: UserTypesService,
     private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
     //populating selects
-    this.usersService.getAll().subscribe(
+    this.userTypesService.getActive().subscribe(
       result => {
-        this.typeUser = result as User[];
+        this.userTypes = result as UserType[];
       }, error=>{
         if(error.status == 404){
-          alert("Error al obtener los datos de tipos de usuario del servidor");
-      }
-    });
+          alert("Error al obtener los datos del servidor");
+        }
+      });
 
     //if comes from edit
     if(this.user.id != undefined){
@@ -80,8 +80,19 @@ export class UsuariosDialogComponent implements OnInit {
     this.user.phone = this.userForm.controls['phone'].value;
     this.user.password = this.userForm.controls['password'].value;
     this.user.state = this.userForm.controls['state'].value;
-    this.user.type_user_id = /*this.userForm.controls['type_user_id'].value*/1;
+    this.user.type_user_id = this.userForm.controls['type_user_id'].value;
 
+    //Validando que se haya ingresado la contraseña (no se valida con Validators porque esta
+    //validación no aplica para edit)
+    if (this.user.id == undefined) {
+      if (this.userForm.controls['password'].value == null) {
+        this.openSnackBar("Debe proporcionar una contraseña", "Cerrar");
+        this.isSending = false;
+        return;
+      }
+    }
+
+    //Validando que las contraseñas coincidan
     if (this.userForm.controls['password'].value != this.userForm.controls['passwordConfirm'].value) {
       this.openSnackBar("Las contraseñas ingresadas no coinciden", "Cerrar");
       this.isSending = false;
