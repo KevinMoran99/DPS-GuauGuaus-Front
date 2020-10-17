@@ -27,6 +27,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
@@ -115,6 +116,7 @@ const config: InputFileConfig = {
     MatProgressBarModule,
     MatRadioModule,
     MatInputModule,
+    MatPaginatorModule,
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,

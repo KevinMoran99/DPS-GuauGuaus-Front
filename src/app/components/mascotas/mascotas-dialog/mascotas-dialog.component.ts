@@ -56,7 +56,7 @@ export class MascotasDialogComponent implements OnInit {
   ngOnInit(): void {
 
     //populating selects
-    this.speciesService.getAll().subscribe(
+    this.speciesService.getActive().subscribe(
       result => {
         this.species = result as Specie[];
       }, error=>{

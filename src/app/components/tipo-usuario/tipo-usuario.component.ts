@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { ModalSettings } from 'src/app/helpers/settings';
 import { UserType } from 'src/app/models/user-type.model';
 import { UserTypesService } from 'src/app/services/user-types.service';
@@ -16,11 +18,13 @@ export class TipoUsuarioComponent implements OnInit {
     columnsToDisplay = ['name', 'state', 'edit'];
     //specie objects
     userType: UserType;
-    userTypes: UserType[];
+    userTypes: MatTableDataSource<UserType>;
   
     constructor(
       private userTypesService: UserTypesService,
       private dialog: MatDialog,) { }
+      
+    @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   
     ngOnInit(){
       this.getAll();
@@ -30,7 +34,8 @@ export class TipoUsuarioComponent implements OnInit {
     getAll(){
       this.userTypesService.getAll().subscribe(
         result => {
-          this.userTypes = result as UserType[];
+          this.userTypes = new MatTableDataSource<UserType>(result as UserType[]);
+          this.userTypes.paginator = this.paginator;
         }, error=>{
           if(error.status == 404){
             alert("Error al obtener los datos del servidor");
@@ -53,8 +58,8 @@ export class TipoUsuarioComponent implements OnInit {
   
     //opening the Add Specie Dialog
     openDialog(userType?: UserType): void {
-      const dialogRef = this.dialog.open(TipoUsuarioDialogComponent, ModalSettings.especiesAddSettings);
-      dialogRef.componentInstance.title = ModalSettings.especiesAddSettings.title;
+      const dialogRef = this.dialog.open(TipoUsuarioDialogComponent, ModalSettings.tipoUsuarioAddSettings);
+      dialogRef.componentInstance.title = ModalSettings.tipoUsuarioAddSettings.title;
       if(userType != undefined){
         dialogRef.componentInstance.userType = userType;
       }

@@ -8,8 +8,8 @@
             </ng-container>
             <!--Name Col -->
             <ng-container matColumnDef="duration">
-                <th mat-header-cell *matHeaderCellDef>Duracion</th>
-                <td mat-cell *matCellDef="let item">{{item.duration}} </td>
+                <th mat-header-cell *matHeaderCellDef>Duración en minutos</th>
+                <td mat-cell *matCellDef="let item">{{item.duration + " minuto(s)"}} </td>
               </ng-container>
             <!--Name Col -->
             <ng-container matColumnDef="state">
@@ -27,6 +27,15 @@
             <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
             <tr mat-row *matRowDef="let rowData; columns: columnsToDisplay;"></tr>
           </table>
+          <div class="paginator-container">
+            <br>
+            <mat-paginator [length]="100"
+                          [pageSize]="10"
+                          [pageSizeOptions]="[5, 10, 25, 100]"
+                          showFirstLastButtons>
+            </mat-paginator>
+            <br>
+          </div>
           <div class="fav-icon">
             <button mat-fab color="accent" aria-label="Add species" (click)="openDialog()">
               <mat-icon>add</mat-icon>

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { User } from '../../models/user.model';
 //from here we get the data
 import { UsersService } from '../../services/users.service';
@@ -18,11 +20,13 @@ export class UsuariosComponent implements OnInit {
   columnsToDisplay = ['name', 'lastname', 'email', 'type_user', 'state', 'edit'];
   //user objects
   user: User;
-  users: User[];
+  users: MatTableDataSource<User>;
 
   constructor(
     private usersService: UsersService,
     private dialog: MatDialog) { }
+    
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit() {
     this.getAll();
@@ -32,7 +36,8 @@ export class UsuariosComponent implements OnInit {
   getAll(){
     this.usersService.getAll().subscribe(
       result => {
-        this.users = result as User[];
+        this.users = new MatTableDataSource<User>(result as User[]);
+        this.users.paginator = this.paginator;
       }, error=>{
         if(error.status == 404){
           alert("Error al obtener los datos del servidor");

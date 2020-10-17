@@ -7,6 +7,7 @@ import { auth } from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from "../models/user.model";
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -14,7 +15,7 @@ import { User } from "../models/user.model";
 })
 export class AuthService {
   userData: any; // Guardar datos de usuario registrados
-  uri = 'http://104.197.18.35/DPS-GuauGuaus-Back/public';
+  uri = environment.baseUrl;
   token;
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.logIn);
 

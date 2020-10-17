@@ -8,6 +8,7 @@ import { Specie } from '../models/specie.model';
 })
 export class SpeciesService {
   endpoint:string = "species";
+  modifier:string = ""
 
   constructor(
     private http: HttpClient 
@@ -15,6 +16,10 @@ export class SpeciesService {
   
   getAll(){
     return this.http.get(environment.baseUrl+this.endpoint);
+  }
+  getActive(){
+    this.modifier = "/active";
+    return this.http.get(environment.baseUrl+this.endpoint+this.modifier);
   }
   post(specie: Specie) {
     return this.http.post(environment.baseUrl+this.endpoint,specie);

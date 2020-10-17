@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseUrl: "http://104.197.18.35/DPS-GuauGuaus-Back/public/",
+  baseUrl: "http://34.123.48.65/DPS-GuauGuaus-Back/public/",
   firebase: {
   apiKey: "AIzaSyDRzLj0wxkVDR3a4RsAzcHdsS4-dLYoX2o",
   authDomain: "sistema-veterinaria.firebaseapp.com",

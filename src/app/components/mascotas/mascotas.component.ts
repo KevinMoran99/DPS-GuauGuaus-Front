@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Pet } from '../../models/pet.model';
 //from here we get the data
 import { PetsService } from '../../services/pets.service';
@@ -18,11 +20,13 @@ export class MascotasComponent implements OnInit {
   columnsToDisplay = ['name', 'specie', 'owner', 'state', 'edit'];
   //pet objects
   pet: Pet;
-  pets: Pet[];
+  pets: MatTableDataSource<Pet>;
 
   constructor(
     private petsService: PetsService,
     private dialog: MatDialog) { }
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit() {
     this.getAll();
@@ -32,7 +36,8 @@ export class MascotasComponent implements OnInit {
   getAll(){
     this.petsService.getAll().subscribe(
       result => {
-        this.pets = result as Pet[];
+        this.pets = new MatTableDataSource<Pet>(result as Pet[]);
+        this.pets.paginator = this.paginator;
       }, error=>{
         if(error.status == 404){
           alert("Error al obtener los datos del servidor");

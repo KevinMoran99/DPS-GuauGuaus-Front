@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { ModalSettings } from 'src/app/helpers/settings';
 import { AppointmentTypes } from 'src/app/models/appointment-types.model';
 import { AppointmentTypesService } from 'src/app/services/appointment-types.service';
@@ -16,11 +18,13 @@ export class TiposCitaComponent implements OnInit {
   columnsToDisplay = ['name','duration', 'state', 'edit'];
   //specie objects
   appointmentType: AppointmentTypes;
-  appointmentTypes: AppointmentTypes[];
+  appointmentTypes: MatTableDataSource<AppointmentTypes>;
 
   constructor(
     private appointmentTypeService: AppointmentTypesService,
     private dialog: MatDialog,) { }
+    
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit(){
     this.getAll();
@@ -30,7 +34,8 @@ export class TiposCitaComponent implements OnInit {
   getAll(){
     this.appointmentTypeService.getAll().subscribe(
       result => {
-        this.appointmentTypes = result as AppointmentTypes[];
+        this.appointmentTypes = new MatTableDataSource<AppointmentTypes>(result as AppointmentTypes[]);
+        this.appointmentTypes.paginator = this.paginator;
       }, error=>{
         if(error.status == 404){
           alert("Error al obtener los datos del servidor");

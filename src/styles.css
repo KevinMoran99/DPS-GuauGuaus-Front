@@ -36,3 +36,8 @@ mat-dialog-actions{
 .edit{
     width: 25px;
 }
+.paginator-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
