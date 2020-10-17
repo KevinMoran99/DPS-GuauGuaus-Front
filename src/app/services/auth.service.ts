@@ -46,12 +46,17 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    this.http.post(this.uri + '/login', {email: email,password: password}).subscribe((resp: any) => {
+    this.http.post(this.uri + '/login', {email: email,password: password}).subscribe(
+      (resp: any) => {
       this.loggedIn.next(true);
       this.location.replaceState('/');
       this.router.navigate(['']);
       localStorage.setItem('auth', JSON.stringify(resp));
-      }) 
+      },
+      error => { 
+        window.alert("Credenciales Incorrectas."); 
+      }
+      ) 
     }
 
   logout() {
