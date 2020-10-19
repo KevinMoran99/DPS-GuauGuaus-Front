@@ -12,5 +12,7 @@ Backend (Laravel Lumen): `https://github.com/KevinMoran99/DPS-GuauGuaus-Back`
 `http://34.123.48.65/DPS-GuauGuaus-Front/login`
 
 Credenciales de usuario normal (no google):
+
 Correo: miguelf@gamil.com
+
 Contraseña: 123456
