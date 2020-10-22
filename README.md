@@ -20,7 +20,7 @@ Backend (Laravel Lumen): `https://github.com/KevinMoran99/DPS-GuauGuaus-Back`
 `https://trello.com/b/0rA9jb29/los-guau-guaus`
 
 ## Hosting
-`http://34.123.48.65/DPS-GuauGuaus-Front/login`
+`http://34.123.48.65/DPS-GuauGuaus-Front`
 
 Credenciales de usuario normal (no google):
 
