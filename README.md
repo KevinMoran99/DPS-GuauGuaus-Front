@@ -1,27 +1,29 @@
 # DPSGuauGuausFront
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.0.
+## Integrantes
+Fernando José Reyes Vásquez G03T - RV180800
 
-## Development server
+German Gustavo Cáceres Espinosa G03T - CE140543
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Kevin Roberto Morán García G03T - MG171623
 
-## Code scaffolding
+Miguel Ángel Flores Reyes G03T - FR180116
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Oscar Ernesto Méndez Argueta G03T - MA171622
 
-## Build
+## Repositorios
+Frontend (Angular): `https://github.com/KevinMoran99/DPS-GuauGuaus-Front`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Backend (Laravel Lumen): `https://github.com/KevinMoran99/DPS-GuauGuaus-Back`
 
-## Running unit tests
+## Board de Trello
+`https://trello.com/b/0rA9jb29/los-guau-guaus`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Hosting
+`http://34.123.48.65/DPS-GuauGuaus-Front`
 
-## Running end-to-end tests
+Credenciales de usuario normal (no google):
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Correo: miguelf@gamil.com
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Contraseña: 123456
