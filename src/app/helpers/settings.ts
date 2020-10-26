@@ -34,6 +34,12 @@ export const ModalSettings = {
         width: '800px',
         title: 'Agregar tipo de usuario',
         disableClose: true
+    },
+    permissionAddSettings: {
+        height: 'auto',
+        width: '800px',
+        title: 'Agregar permiso',
+        disableClose: true
     }
 
 }

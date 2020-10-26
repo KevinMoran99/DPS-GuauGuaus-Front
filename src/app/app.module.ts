@@ -37,7 +37,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CitasComponent } from './components/citas/citas.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
-import { PermisosComponent } from './components/permisos/permisos.component';
 import { EspeciesComponent } from './components/especies/especies.component';
 import { AboutComponent } from './components/about/about.component';
 import { EspeciesDialogComponent } from './components/especies/especies-dialog/especies-dialog.component';
@@ -61,6 +60,9 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import { PermisosComponent } from './components/permisos/permisos.component';
+import { PermisosDialogComponent } from './components/permisos/permisos-dialog/permisos-dialog.component';
+
 
 //imagepicker config
 const config: InputFileConfig = {
@@ -74,7 +76,6 @@ const config: InputFileConfig = {
     DashboardComponent,
     CitasComponent,
     UsuariosComponent,
-    PermisosComponent,
     EspeciesComponent,
     AboutComponent,
     EspeciesDialogComponent,
@@ -89,8 +90,9 @@ const config: InputFileConfig = {
     UsuariosMascotasComponent,
     TipoUsuarioComponent,
     TipoUsuarioDialogComponent,
-    LoginComponent
-   
+    LoginComponent,
+    PermisosComponent,
+    PermisosDialogComponent
   ],
   imports: [
     BrowserModule,

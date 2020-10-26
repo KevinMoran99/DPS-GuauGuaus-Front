@@ -5,7 +5,6 @@ import { MascotasComponent } from './components/mascotas/mascotas.component';
 import { CitasComponent } from './components/citas/citas.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EspeciesComponent } from './components/especies/especies.component';
-import { PermisosComponent } from './components/permisos/permisos.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { CondicionMedicaComponent } from './components/condicion-medica/condicion-medica.component';
 import { TiposCitaComponent } from './components/tipos-cita/tipos-cita.component';
@@ -13,6 +12,7 @@ import { TipoUsuarioComponent } from './components/tipo-usuario/tipo-usuario.com
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { PermisosComponent } from './components/permisos/permisos.component';
 
 const routes: Routes = [
   {

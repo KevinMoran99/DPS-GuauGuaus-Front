@@ -1,0 +1,66 @@
+<mat-progress-bar *ngIf="isSending" mode="indeterminate"></mat-progress-bar>
+<h2 mat-dialog-title>{{title}}</h2>
+    <form [formGroup]="permissionForm">
+        <mat-dialog-content>
+          <mat-form-field appearance="fill">
+            <mat-label>Registro</mat-label>
+            <mat-select formControlName="registro">
+              <mat-option value="usuarios">Usuarios</mat-option>
+              <mat-option value="tipos de usuarios">Tipos de usuarios</mat-option>
+              <mat-option value="especies">Especies</mat-option>
+              <mat-option value="horarios">Horarios</mat-option>
+              <mat-option value="especiales">Especiales</mat-option>
+              <mat-option value="mascotas">Mascotas</mat-option>
+              <mat-option value="detalles de mascotas">Detalles de mascotas</mat-option>
+              <mat-option value="permisos">Permisos</mat-option>
+              <mat-option value="condicion medica">Condicion medica</mat-option>
+              <mat-option value="tipos de citas">Tipos de citas</mat-option>
+              <mat-option value="citas">Citas</mat-option>
+            </mat-select>
+          </mat-form-field>
+            <br>
+            <mat-radio-group formControlName="create">
+                <label>Crear: </label>
+                <mat-radio-button value="1" checked>Permitir</mat-radio-button>
+                <mat-radio-button value="0">Denegar</mat-radio-button>
+              </mat-radio-group>
+            <br>
+            <mat-radio-group formControlName="read">
+                <label>Leer: </label>
+                <mat-radio-button value="1" checked>Permitir</mat-radio-button>
+                <mat-radio-button value="0">Denegar</mat-radio-button>
+              </mat-radio-group>
+            <br>
+            <mat-radio-group formControlName="update">
+                <label>Actualizar: </label>
+                <mat-radio-button value="1" checked>Permitir</mat-radio-button>
+                <mat-radio-button value="0">Denegar</mat-radio-button>
+              </mat-radio-group>
+            <br>
+            <mat-radio-group formControlName="delete">
+                <label>Eliminar: </label>
+                <mat-radio-button value="1" checked>Permitir</mat-radio-button>
+                <mat-radio-button value="0">Denegar</mat-radio-button>
+              </mat-radio-group>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Tipo de usuario</mat-label>
+                <mat-select formControlName="users_types_id">
+                    <mat-option *ngFor="let type of userTypes" [value]="type.id">
+                    {{type.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-radio-group formControlName="state">
+              <label>Estado: </label>
+              <mat-radio-button value="1" checked>Activo</mat-radio-button>
+              <mat-radio-button value="0">Inactivo</mat-radio-button>
+            </mat-radio-group>
+          <br>
+          </mat-dialog-content>
+          <mat-dialog-actions>
+            <button mat-raised-button color="error" (click)="close()">Cancelar</button>
+            <button type="submit" mat-raised-button color="primary" (click)="send()" [disabled]="!permissionForm.valid">Enviar</button>
+        </mat-dialog-actions>
+    </form>
