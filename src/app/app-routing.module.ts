@@ -9,6 +9,7 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { CondicionMedicaComponent } from './components/condicion-medica/condicion-medica.component';
 import { TiposCitaComponent } from './components/tipos-cita/tipos-cita.component';
 import { TipoUsuarioComponent } from './components/tipo-usuario/tipo-usuario.component';
+import { CondicionesMascotasComponent } from './components/mascotas/condiciones-mascotas/condiciones-mascotas.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
@@ -33,7 +34,9 @@ const routes: Routes = [
       {path: 'about', component: AboutComponent, canActivate: [AuthGuard]},
       {path: 'condicion-medica', component: CondicionMedicaComponent, canActivate: [AuthGuard]},
       {path: 'tipo-citas', component: TiposCitaComponent, canActivate: [AuthGuard]},
-      {path: 'tipo-usuarios', component: TipoUsuarioComponent, canActivate: [AuthGuard]}
+      {path: 'tipo-usuarios', component: TipoUsuarioComponent, canActivate: [AuthGuard]},
+
+      {path: 'condiciones-mascotas/:petId', component: CondicionesMascotasComponent, canActivate: [AuthGuard]}
     ]
   },
   { path: '**', redirectTo: ''} 

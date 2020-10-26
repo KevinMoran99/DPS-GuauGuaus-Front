@@ -60,9 +60,14 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+<<<<<<< HEAD
 import { PermisosComponent } from './components/permisos/permisos.component';
 import { PermisosDialogComponent } from './components/permisos/permisos-dialog/permisos-dialog.component';
 
+=======
+import { CondicionesMascotasComponent } from './components/mascotas/condiciones-mascotas/condiciones-mascotas.component';
+import { CondmasDialogComponent } from './components/mascotas/condiciones-mascotas/condmas-dialog/condmas-dialog.component';
+>>>>>>> e45ebc457845ec5b8d0f6e47a3b79bc4c9198fdf
 
 //imagepicker config
 const config: InputFileConfig = {
@@ -91,8 +96,14 @@ const config: InputFileConfig = {
     TipoUsuarioComponent,
     TipoUsuarioDialogComponent,
     LoginComponent,
+<<<<<<< HEAD
     PermisosComponent,
     PermisosDialogComponent
+=======
+    CondicionesMascotasComponent,
+    CondmasDialogComponent
+   
+>>>>>>> e45ebc457845ec5b8d0f6e47a3b79bc4c9198fdf
   ],
   imports: [
     BrowserModule,
