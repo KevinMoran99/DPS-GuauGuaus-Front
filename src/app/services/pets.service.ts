@@ -21,6 +21,10 @@ export class PetsService {
     this.modifier = "/active";
     return this.http.get(environment.baseUrl+this.endpoint+this.modifier);
   }
+  get(id: number){
+    this.modifier = "/" + id;
+    return this.http.get(environment.baseUrl+this.endpoint+this.modifier);
+  }
   post(pet: Pet) {
     return this.http.post(environment.baseUrl+this.endpoint,pet);
   }

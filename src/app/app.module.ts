@@ -61,6 +61,8 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import { CondicionesMascotasComponent } from './components/mascotas/condiciones-mascotas/condiciones-mascotas.component';
+import { CondmasDialogComponent } from './components/mascotas/condiciones-mascotas/condmas-dialog/condmas-dialog.component';
 
 //imagepicker config
 const config: InputFileConfig = {
@@ -89,7 +91,9 @@ const config: InputFileConfig = {
     UsuariosMascotasComponent,
     TipoUsuarioComponent,
     TipoUsuarioDialogComponent,
-    LoginComponent
+    LoginComponent,
+    CondicionesMascotasComponent,
+    CondmasDialogComponent
    
   ],
   imports: [

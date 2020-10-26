@@ -17,7 +17,7 @@ import { ModalSettings } from '../../helpers/settings';
 export class MascotasComponent implements OnInit {
 
   //columns to display in the table
-  columnsToDisplay = ['name', 'specie', 'owner', 'state', 'edit'];
+  columnsToDisplay = ['name', 'specie', 'owner', 'state', 'edit', 'conditions'];
   //pet objects
   pet: Pet;
   pets: MatTableDataSource<Pet>;

@@ -9,6 +9,7 @@ import { MedicalCondition } from '../models/medical-condition.model';
 export class MedicalConditionsService {
 
   endpoint:string = "medicalconditions";
+  modifier:string = "";
 
   constructor(
     private http: HttpClient 
@@ -16,6 +17,10 @@ export class MedicalConditionsService {
   
   getAll(){
     return this.http.get(environment.baseUrl+this.endpoint);
+  }
+  getActive(){
+    this.modifier = "/active";
+    return this.http.get(environment.baseUrl+this.endpoint+this.modifier);
   }
   post(medicalCondition: MedicalCondition) {
     return this.http.post(environment.baseUrl+this.endpoint,medicalCondition);

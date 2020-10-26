@@ -1,0 +1,27 @@
+<mat-progress-bar *ngIf="isSending" mode="indeterminate"></mat-progress-bar>
+<h2 mat-dialog-title>{{title}}</h2>
+    <form [formGroup]="detailForm">
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Condición Médica</mat-label>
+                <mat-select formControlName="codition_id">
+                    <mat-option *ngFor="let condition of conditions" [value]="condition.id">
+                    {{condition.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Observaciones</mat-label>
+                <input matInput formControlName="observations">
+            </mat-form-field>
+            <mat-radio-group formControlName="state">
+            <label>Estado: </label>
+                <mat-radio-button value="1" checked>Activo</mat-radio-button>
+                <mat-radio-button value="0">Inactivo</mat-radio-button>
+            </mat-radio-group>
+        </div>
+          <mat-dialog-actions>
+            <button mat-raised-button color="error" (click)="close()">Cancelar</button>
+            <button type="submit" mat-raised-button color="primary" (click)="send()" [disabled]="!detailForm.valid">Enviar</button>
+        </mat-dialog-actions>
+    </form>
