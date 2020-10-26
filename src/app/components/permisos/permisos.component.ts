@@ -15,7 +15,6 @@ import { ModalSettings } from '../../helpers/settings';
   styleUrls: ['./permisos.component.css']
 })
 export class PermisosComponent implements OnInit {
-
  //columns to display in the table
  columnsToDisplay = ['registro', 'create', 'read', 'update', 'delete', 'type_user', 'state', 'edit'];
  //user objects
