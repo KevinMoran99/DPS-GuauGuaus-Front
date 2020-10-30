@@ -40,6 +40,19 @@ export const ModalSettings = {
         width: '800px',
         title: 'Agregar permiso',
         disableClose: true
+    },
+    
+    ScheduleAddSettings: {
+        height: 'auto',
+        width: '800px',
+        title: 'Agregar horario',
+        disableClose: true
+    },
+    SpecialAddSettings: {
+        height: 'auto',
+        width: '800px',
+        title: 'Agregar horario especial',
+        disableClose: true
     }
 
 }

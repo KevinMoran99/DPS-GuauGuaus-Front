@@ -32,4 +32,9 @@ export class UsersService {
   login(user: User){
     return this.http.post("http://104.197.18.35/DPS-GuauGuaus-Back/public/login", user);
   }
+
+  get(id: number){
+    this.modifier = "/" + id;
+    return this.http.get(environment.baseUrl+this.endpoint+this.modifier);
+  }
 }

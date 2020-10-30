@@ -17,10 +17,11 @@ import { ModalSettings } from '../../helpers/settings';
 export class UsuariosComponent implements OnInit {
 
   //columns to display in the table
-  columnsToDisplay = ['name', 'lastname', 'email', 'type_user', 'state', 'edit'];
+  columnsToDisplay = ['name', 'lastname', 'email', 'type_user', 'state', 'edit', 'schedules', 'specials'];
   //user objects
   user: User;
   users: MatTableDataSource<User>;
+  isdoctor = false;
 
   constructor(
     private usersService: UsersService,

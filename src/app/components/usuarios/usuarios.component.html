@@ -32,6 +32,22 @@
                     <mat-icon>edit</mat-icon>
                 </button>
             </ng-container>
+            <ng-container matColumnDef="schedules">
+              <th mat-header-cell *matHeaderCellDef>Horarios</th>
+              <td mat-cell *matCellDef="let item">
+                <button class="schedules" mat-mini-fab color="accent" aria-label="Update Specie" [routerLink]="['/horarios-doctores', item.id]">
+                    <mat-icon>event</mat-icon>
+                </button>
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="specials">
+            <th mat-header-cell *matHeaderCellDef>Especiales</th>
+            <td mat-cell *matCellDef="let item">
+              <button class="specials" mat-mini-fab color="accent" aria-label="Update Specie" [routerLink]="['/especiales-doctores', item.id]">
+                  <mat-icon>alarm_on</mat-icon>
+              </button>
+            </td>
+        </ng-container>
           
             <!-- ROW Info-->
             <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>

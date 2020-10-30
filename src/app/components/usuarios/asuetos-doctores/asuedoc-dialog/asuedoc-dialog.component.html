@@ -1,0 +1,38 @@
+<mat-progress-bar *ngIf="isSending" mode="indeterminate"></mat-progress-bar>
+<h2 mat-dialog-title>{{title}}</h2>
+    <form [formGroup]="specialForm">
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Doctor</mat-label>
+                <mat-select formControlName="doctor_id">
+                    <mat-option *ngFor="let users of user" [value]="users.id">
+                    {{users.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field >
+                <mat-label>Dia</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="day">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Hora inicio</mat-label>
+                <input type="time" matInput formControlName="start_hour">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Hora final</mat-label>
+                <input type="time" matInput formControlName="finish_hour">
+            </mat-form-field>
+            <mat-radio-group formControlName="state">
+            <label>Estado: </label>
+                <mat-radio-button value="1" checked>Activo</mat-radio-button>
+                <mat-radio-button value="0">Inactivo</mat-radio-button>
+            </mat-radio-group>
+        </div>
+          <mat-dialog-actions>
+            <button mat-raised-button color="error" (click)="close()">Cancelar</button>
+            <button type="submit" mat-raised-button color="primary" (click)="send()" [disabled]="!specialForm.valid">Enviar</button>
+        </mat-dialog-actions>
+    </form>
+

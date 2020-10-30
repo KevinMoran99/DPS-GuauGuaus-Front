@@ -64,6 +64,10 @@ import { PermisosComponent } from './components/permisos/permisos.component';
 import { PermisosDialogComponent } from './components/permisos/permisos-dialog/permisos-dialog.component';
 import { CondicionesMascotasComponent } from './components/mascotas/condiciones-mascotas/condiciones-mascotas.component';
 import { CondmasDialogComponent } from './components/mascotas/condiciones-mascotas/condmas-dialog/condmas-dialog.component';
+import { HorariosDoctoresComponent } from './components/usuarios/horarios-doctores/horarios-doctores.component';
+import { HoradocDialogComponent } from './components/usuarios/horarios-doctores/horadoc-dialog/horadoc-dialog.component';
+import { AsuetosDoctoresComponent } from './components/usuarios/asuetos-doctores/asuetos-doctores.component';
+import { AsuedocDialogComponent } from './components/usuarios/asuetos-doctores/asuedoc-dialog/asuedoc-dialog.component';
 
 
 //imagepicker config
@@ -96,7 +100,11 @@ const config: InputFileConfig = {
     PermisosComponent,
     PermisosDialogComponent,
     CondicionesMascotasComponent,
-    CondmasDialogComponent
+    CondmasDialogComponent,
+    HorariosDoctoresComponent,
+    HoradocDialogComponent,
+    AsuetosDoctoresComponent,
+    AsuedocDialogComponent
 
   ],
   imports: [
