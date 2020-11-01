@@ -14,7 +14,7 @@
             <!--Name Col -->
             <ng-container matColumnDef="owner">
               <th mat-header-cell *matHeaderCellDef>Dueño</th>
-              <td mat-cell *matCellDef="let item">{{item.owner.name + " " + item.owner.lastname}} </td>
+              <td mat-cell *matCellDef="let item">{{item.owner.lastname ? item.owner.name+" "+item.owner.lastname : item.owner.name}} </td>
             </ng-container>
             <!--Name Col -->
             <ng-container matColumnDef="state">

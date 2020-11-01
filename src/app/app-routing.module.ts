@@ -16,6 +16,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { PermisosComponent } from './components/permisos/permisos.component';
 import { HorariosDoctoresComponent } from './components/usuarios/horarios-doctores/horarios-doctores.component';
 import { AsuetosDoctoresComponent } from './components/usuarios/asuetos-doctores/asuetos-doctores.component';
+import { MisMascotasComponent } from './components/mis-mascotas/mis-mascotas.component';
 
 const routes: Routes = [
   {
@@ -39,7 +40,8 @@ const routes: Routes = [
       {path: 'tipo-usuarios', component: TipoUsuarioComponent, canActivate: [AuthGuard]},
       {path: 'horarios-doctores/:userId', component: HorariosDoctoresComponent, canActivate: [AuthGuard]},
       {path: 'especiales-doctores/:userId', component: AsuetosDoctoresComponent, canActivate: [AuthGuard]},
-      {path: 'condiciones-mascotas/:petId', component: CondicionesMascotasComponent, canActivate: [AuthGuard]}
+      {path: 'condiciones-mascotas/:petId', component: CondicionesMascotasComponent, canActivate: [AuthGuard]},
+      {path: 'mis-mascotas', component: MisMascotasComponent, canActivate: [AuthGuard]}
     ]
   },
   { path: '**', redirectTo: ''} 

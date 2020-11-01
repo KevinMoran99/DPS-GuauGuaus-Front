@@ -55,6 +55,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth.service'
 import { AuthGuard } from './guards/auth.guard';
 
+
 // Firebase services
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
@@ -68,6 +69,7 @@ import { HorariosDoctoresComponent } from './components/usuarios/horarios-doctor
 import { HoradocDialogComponent } from './components/usuarios/horarios-doctores/horadoc-dialog/horadoc-dialog.component';
 import { AsuetosDoctoresComponent } from './components/usuarios/asuetos-doctores/asuetos-doctores.component';
 import { AsuedocDialogComponent } from './components/usuarios/asuetos-doctores/asuedoc-dialog/asuedoc-dialog.component';
+import { MisMascotasComponent } from './components/mis-mascotas/mis-mascotas.component';
 
 
 //imagepicker config
@@ -104,7 +106,8 @@ const config: InputFileConfig = {
     HorariosDoctoresComponent,
     HoradocDialogComponent,
     AsuetosDoctoresComponent,
-    AsuedocDialogComponent
+    AsuedocDialogComponent,
+    MisMascotasComponent
 
   ],
   imports: [

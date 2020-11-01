@@ -17,7 +17,7 @@
                         <mat-label>Dueño</mat-label>
                         <mat-select formControlName="owner_id">
                           <mat-option *ngFor="let user of users" [value]="user.id">
-                            {{user.name + " " + user.lastname}}
+                            {{user.lastname?user.name+" "+user.lastname:user.name}}
                           </mat-option>
                         </mat-select>
                     </mat-form-field>

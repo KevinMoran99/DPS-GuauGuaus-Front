@@ -22,8 +22,10 @@ export class MascotasDialogComponent implements OnInit {
 
   //properties to be accesed by the dialog
   public title:string;
+  public client:boolean;
   pet = new Pet();
   isSending: boolean = false;
+  user:User;
 
   //Validating form
   petForm: FormGroup = this.formBuilder.group({
@@ -54,7 +56,9 @@ export class MascotasDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    this.user = JSON.parse(localStorage.getItem('auth'));
+    this.petForm.controls['owner_id'].setValue(this.user.id);
+    this.client? this.petForm.controls['owner_id'].disable() : this.petForm.controls['owner_id'].enable();
     //populating selects
     this.speciesService.getActive().subscribe(
       result => {

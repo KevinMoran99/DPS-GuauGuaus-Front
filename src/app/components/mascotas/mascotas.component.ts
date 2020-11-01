@@ -65,6 +65,7 @@ export class MascotasComponent implements OnInit {
   openDialog(pet?: Pet): void {
     const dialogRef = this.dialog.open(MascotasDialogComponent, ModalSettings.especiesAddSettings);
     dialogRef.componentInstance.title = ModalSettings.mascotasAddSettings.title;
+    dialogRef.componentInstance.client = false;
     if(pet != undefined){
       dialogRef.componentInstance.pet = pet;
     }

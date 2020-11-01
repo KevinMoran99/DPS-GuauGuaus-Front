@@ -1,0 +1,20 @@
+<h3 class="title">Mis mascotas</h3>
+<div class="container">
+    
+    <mat-grid-list [cols]="columns" rowHeight="225px" (window:resize)="onResize($event)">
+        <mat-grid-tile *ngFor="let item of pets" >
+          <mat-card (click)="petDetails(item)">
+              <img id="avatar" mat-card-avatar src="http://34.123.48.65/DPS-GuauGuaus-Back/public/{{item.photo}}" onerror="this.onerror=null; this.src='assets/img/default.png'" alt="User Avatar">
+              <mat-card-title>
+                  {{item.name}}
+              </mat-card-title>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <div class="fav-icon">
+        <button mat-fab color="accent" aria-label="Add species" (click)="openDialog()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+</div>
+

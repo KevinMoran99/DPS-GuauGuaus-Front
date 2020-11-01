@@ -1,0 +1,15 @@
+mat-card{
+    width: 75%;
+    height: 150px;
+    margin: 10px;
+    text-align: center;
+    background-color: #e2e2e2;
+}
+mat-card-title{
+    font-size: 1.2em;
+    margin-top: 10px !important;
+}
+#avatar{
+    width: 100px;
+    height: 100px;
+}
