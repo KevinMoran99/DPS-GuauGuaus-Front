@@ -9,18 +9,21 @@ import { MascotasDialogComponent } from './mascotas-dialog/mascotas-dialog.compo
 //here are stored all our modal settings
 import { ModalSettings } from '../../helpers/settings';
 
+import { User } from 'src/app/models/user.model';
+
 @Component({
   selector: 'app-mascotas',
   templateUrl: './mascotas.component.html',
   styleUrls: ['./mascotas.component.css']
 })
 export class MascotasComponent implements OnInit {
-
+  user: User;
   //columns to display in the table
   columnsToDisplay = ['name', 'specie', 'owner', 'state', 'edit', 'conditions'];
   //pet objects
   pet: Pet;
   pets: MatTableDataSource<Pet>;
+  //petsOwner: Pet[];
 
   constructor(
     private petsService: PetsService,
@@ -29,9 +32,22 @@ export class MascotasComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('auth'));
     this.getAll();
+    //this.getByOwner();
   }
-
+  /*
+  getByOwner(){
+    this.petsService.getByOwner(this.user.id).subscribe(
+      result => {
+        this.petsOwner = result as Pet[];
+        console.log(this.petsOwner);
+      }, error=>{
+        if(error.status == 404){
+          alert("Error al obtener los datos del servidor");
+        }
+      });
+  }*/
   //we try to get all the pets from the API
   getAll(){
     this.petsService.getAll().subscribe(

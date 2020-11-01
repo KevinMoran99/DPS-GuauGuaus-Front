@@ -21,6 +21,10 @@ export class PetsService {
     this.modifier = "/active";
     return this.http.get(environment.baseUrl+this.endpoint+this.modifier);
   }
+  getByOwner(id: number){
+    this.modifier = "/client/";
+    return this.http.get(environment.baseUrl+this.endpoint+this.modifier+id);
+  }
   get(id: number){
     this.modifier = "/" + id;
     return this.http.get(environment.baseUrl+this.endpoint+this.modifier);
