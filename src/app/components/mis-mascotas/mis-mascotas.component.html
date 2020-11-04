@@ -4,7 +4,7 @@
     <mat-grid-list [cols]="columns" rowHeight="225px" (window:resize)="onResize($event)">
         <mat-grid-tile *ngFor="let item of pets" >
           <mat-card (click)="petDetails(item)">
-              <img id="avatar" mat-card-avatar src="http://34.123.48.65/DPS-GuauGuaus-Back/public/{{item.photo}}" onerror="this.onerror=null; this.src='assets/img/default.png'" alt="User Avatar">
+              <img id="avatar" mat-card-avatar src="http://35.193.100.234/DPS-GuauGuaus-Back/public/{{item.photo}}" onerror="this.onerror=null; this.src='assets/img/default.png'" alt="User Avatar">
               <mat-card-title>
                   {{item.name}}
               </mat-card-title>
