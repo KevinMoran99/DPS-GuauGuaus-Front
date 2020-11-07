@@ -55,6 +55,7 @@ export class AuthService {
       },
       error => { 
         window.alert("Credenciales Incorrectas."); 
+        console.log(error);
       }
       ) 
     }

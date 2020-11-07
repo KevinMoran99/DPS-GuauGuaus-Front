@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 //Angular material
@@ -70,6 +70,8 @@ import { HoradocDialogComponent } from './components/usuarios/horarios-doctores/
 import { AsuetosDoctoresComponent } from './components/usuarios/asuetos-doctores/asuetos-doctores.component';
 import { AsuedocDialogComponent } from './components/usuarios/asuetos-doctores/asuedoc-dialog/asuedoc-dialog.component';
 import { MisMascotasComponent } from './components/mis-mascotas/mis-mascotas.component';
+import { DetalleMascotasComponent } from './components/detalle-mascotas/detalle-mascotas.component';
+import { AuthInterceptor } from './helpers/AuthInterceptor';
 
 
 //imagepicker config
@@ -107,7 +109,8 @@ const config: InputFileConfig = {
     HoradocDialogComponent,
     AsuetosDoctoresComponent,
     AsuedocDialogComponent,
-    MisMascotasComponent
+    MisMascotasComponent,
+    DetalleMascotasComponent
 
   ],
   imports: [
@@ -147,7 +150,9 @@ const config: InputFileConfig = {
   ],
   providers: [
     AuthService,
-    AuthGuard
+    AuthGuard,
+    [ { provide: HTTP_INTERCEPTORS, useClass: 
+      AuthInterceptor, multi: true } ]
   ],
   bootstrap: [AppComponent]
 })

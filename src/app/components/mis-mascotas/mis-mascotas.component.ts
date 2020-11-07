@@ -7,6 +7,8 @@ import { environment } from '../../../environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { MascotasDialogComponent } from '../mascotas/mascotas-dialog/mascotas-dialog.component';
 import { ModalSettings } from 'src/app/helpers/settings';
+import { SharedService } from 'src/app/services/shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mis-mascotas',
@@ -24,7 +26,9 @@ export class MisMascotasComponent implements OnInit {
 
   constructor(
     private petsService: PetsService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private sharedService: SharedService,
+    private router: Router) { }
 
 
   ngOnInit() {
@@ -49,6 +53,8 @@ export class MisMascotasComponent implements OnInit {
   }
 
   petDetails(pet){
+    this.sharedService.sharedObject = pet;
+    this.router.navigate(["detalle-mascota"]);
     console.log(pet as Pet);
   }
 
