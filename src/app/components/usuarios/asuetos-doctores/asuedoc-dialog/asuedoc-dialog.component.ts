@@ -23,7 +23,6 @@ export class AsuedocDialogComponent implements OnInit {
 
  //Validating form
  specialForm: FormGroup = this.formBuilder.group({
-   doctor_id: [, {validators: [Validators.required]}],
    day: [, {validators: [Validators.required]}],
    start_hour: [, {validators: [Validators.required]}],
    finish_hour: [, {validators: [Validators.required]}],
@@ -56,7 +55,6 @@ export class AsuedocDialogComponent implements OnInit {
 
    //if comes from edit
    if(this.special.id != undefined){
-     this.specialForm.controls['doctor_id'].setValue(this.special.doctor_id);
      this.specialForm.controls['day'].setValue(this.special.day);
      this.specialForm.controls['start_hour'].setValue(this.special.start_hour);
      this.specialForm.controls['finish_hour'].setValue(this.special.finish_hour);
@@ -68,7 +66,7 @@ export class AsuedocDialogComponent implements OnInit {
  send(){
    this.isSending = true;
    //updating object
-   this.special.doctor_id = this.specialForm.controls['doctor_id'].value;
+   this.special.doctor_id = this.userId;
    try {
     this.special.day = (this.specialForm.controls['day'].value).toISOString().slice(0,10);
   }
@@ -89,6 +87,7 @@ export class AsuedocDialogComponent implements OnInit {
      },
      error=>{
        this.openSnackBar("Ocurrió un error al ingresar el horario", "Cerrar");
+       this.dialogRef.close();
        console.log(this.special);
      }
      );
@@ -102,6 +101,7 @@ export class AsuedocDialogComponent implements OnInit {
      },
      error=>{
        this.openSnackBar("Ocurrio un error al actualizar el horario", "Cerrar");
+       this.dialogRef.close();
        console.log(this.special);
      }
      );

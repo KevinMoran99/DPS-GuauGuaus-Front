@@ -3,14 +3,6 @@
     <form [formGroup]="scheduleForm">
         <div>
             <mat-form-field appearance="fill">
-                <mat-label>Doctor</mat-label>
-                <mat-select formControlName="doctor_id">
-                    <mat-option *ngFor="let users of user" [value]="users.id">
-                    {{users.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="fill">
                 <mat-label>Dia</mat-label>
                 <mat-select formControlName="day">
                   <mat-option value="Lunes">Lunes</mat-option>

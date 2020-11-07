@@ -19,7 +19,7 @@ import { AsuedocDialogComponent } from './asuedoc-dialog/asuedoc-dialog.componen
 export class AsuetosDoctoresComponent implements OnInit {
 
   //columns to display in the table
-  columnsToDisplay = ['doctor', 'day', 'start_hour', 'finish_hour', 'state', 'edit'];
+  columnsToDisplay = ['day', 'start_hour', 'finish_hour', 'state', 'edit'];
   //current objects
   user: User;
   specials: MatTableDataSource<Special>;

@@ -19,7 +19,7 @@ import { HoradocDialogComponent } from './horadoc-dialog/horadoc-dialog.componen
 export class HorariosDoctoresComponent implements OnInit {
 
   //columns to display in the table
-  columnsToDisplay = ['doctor', 'day', 'start_hour', 'finish_hour', 'state', 'edit'];
+  columnsToDisplay = ['day', 'start_hour', 'finish_hour', 'state', 'edit'];
   //current objects
   user: User;
   schedules: MatTableDataSource<Schedule>;
