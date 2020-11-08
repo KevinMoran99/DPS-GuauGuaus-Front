@@ -68,15 +68,16 @@ export class MascotasDialogComponent implements OnInit {
           alert("Error al obtener los datos de especies del servidor");
       }
     });
-    this.usersService.getActive().subscribe(
-      result => {
-        this.users = result as User[];
-      }, error=>{
-        if(error.status == 404){
-          alert("Error al obtener los datos de usuarios del servidor");
-      }
-    });
-
+    if(!this.client){
+      this.usersService.getActive().subscribe(
+        result => {
+          this.users = result as User[];
+        }, error=>{
+          if(error.status == 404){
+            alert("Error al obtener los datos de usuarios del servidor");
+        }
+      });
+    }
     //if comes from edit
     if(this.pet.id != undefined){
       this.petForm.controls['name'].setValue(this.pet.name);

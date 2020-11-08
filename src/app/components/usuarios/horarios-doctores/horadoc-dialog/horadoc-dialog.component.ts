@@ -80,9 +80,16 @@ export class HoradocDialogComponent implements OnInit {
           this.dialogRef.close();
       },
       error=>{
-        this.openSnackBar("Ocurrió un error al ingresar el horario", "Cerrar");
+        if(500){
+        this.openSnackBar("El servidor esta desconectado.", "Cerrar");
         this.dialogRef.close();
-        console.log(this.schedule);
+        }
+        if(420){
+          this.openSnackBar("Ocurrio un error al ingresar tus datos, por favor verificalos.", "Cerrar");
+        }
+        if(422){
+          this.openSnackBar("Hay un problema con las horas de tu horario.", "Cerrar");
+        }
       }
       );
     }else{
@@ -94,9 +101,16 @@ export class HoradocDialogComponent implements OnInit {
           
       },
       error=>{
-        this.openSnackBar("Ocurrio un error al actualizar el horario", "Cerrar");
-        this.dialogRef.close();
-        console.log(this.schedule);
+          if(500){
+            this.openSnackBar("El servidor esta desconectado.", "Cerrar");
+            this.dialogRef.close();
+            }
+          if(420){
+            this.openSnackBar("Ocurrio un error al actualizar tus datos, por favor verificalos.", "Cerrar");
+          }
+          if(422){
+            this.openSnackBar("Hay un problema con las horas de tu horario.", "Cerrar");
+          }
       }
       );
     }
