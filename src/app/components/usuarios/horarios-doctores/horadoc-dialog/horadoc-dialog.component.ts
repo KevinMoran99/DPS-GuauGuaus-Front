@@ -23,7 +23,6 @@ export class HoradocDialogComponent implements OnInit {
 
   //Validating form
   scheduleForm: FormGroup = this.formBuilder.group({
-    doctor_id: [, {validators: [Validators.required]}],
     day: [, { validators: [Validators.required, Validators.minLength(3), Validators.maxLength(1000)], updateOn: "change" }],
     start_hour: [, {validators: [Validators.required]}],
     finish_hour: [, {validators: [Validators.required]}],
@@ -55,7 +54,6 @@ export class HoradocDialogComponent implements OnInit {
 
     //if comes from edit
     if(this.schedule.id != undefined){
-      this.scheduleForm.controls['doctor_id'].setValue(this.schedule.doctor_id);
       this.scheduleForm.controls['day'].setValue(this.schedule.day);
       this.scheduleForm.controls['start_hour'].setValue(this.schedule.start_hour);
       this.scheduleForm.controls['finish_hour'].setValue(this.schedule.finish_hour);
@@ -67,8 +65,7 @@ export class HoradocDialogComponent implements OnInit {
   send(){
     this.isSending = true;
     //updating object
-    this.schedule.doctor_id = this.scheduleForm.controls['doctor_id'].value;
-    //this.schedule.doctor_id = this.userId;
+    this.schedule.doctor_id = this.userId;
     this.schedule.day = this.scheduleForm.controls['day'].value;
     this.schedule.start_hour = this.scheduleForm.controls['start_hour'].value;
     this.schedule.finish_hour = this.scheduleForm.controls['finish_hour'].value;
@@ -83,8 +80,16 @@ export class HoradocDialogComponent implements OnInit {
           this.dialogRef.close();
       },
       error=>{
-        this.openSnackBar("Ocurrió un error al ingresar el horario", "Cerrar");
-        console.log(this.schedule);
+        if(500){
+        this.openSnackBar("El servidor esta desconectado.", "Cerrar");
+        this.dialogRef.close();
+        }
+        if(420){
+          this.openSnackBar("Ocurrio un error al ingresar tus datos, por favor verificalos.", "Cerrar");
+        }
+        if(422){
+          this.openSnackBar("Hay un problema con las horas de tu horario.", "Cerrar");
+        }
       }
       );
     }else{
@@ -96,8 +101,16 @@ export class HoradocDialogComponent implements OnInit {
           
       },
       error=>{
-        this.openSnackBar("Ocurrio un error al actualizar el horario", "Cerrar");
-        console.log(this.schedule);
+          if(500){
+            this.openSnackBar("El servidor esta desconectado.", "Cerrar");
+            this.dialogRef.close();
+            }
+          if(420){
+            this.openSnackBar("Ocurrio un error al actualizar tus datos, por favor verificalos.", "Cerrar");
+          }
+          if(422){
+            this.openSnackBar("Hay un problema con las horas de tu horario.", "Cerrar");
+          }
       }
       );
     }
