@@ -1,0 +1,19 @@
+#avatar{
+    width: 180px;
+    height: 180px;
+}
+#name{
+    font-size: 40px;
+}
+.header{
+    margin-top: 30px;
+    width: 100%;
+    text-align: center;
+}
+mat-card{
+    font-size: x-large;
+    text-align: center;
+    width: 100%;
+    margin: 15px !important;
+    background-color: #e2e2e2;
+}
