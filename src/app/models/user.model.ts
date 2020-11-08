@@ -1,3 +1,5 @@
+import { Permission } from './permission';
+
 export class User {
     id: number;
     name: string;
@@ -9,6 +11,7 @@ export class User {
     phone: string;
     state: boolean;
     type_user_id: number;
+    permission: Permission[];
     created_at: Date;
     updated_at: Date;
     token: string;

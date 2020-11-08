@@ -52,6 +52,7 @@ export class AuthService {
       this.location.replaceState('/');
       this.router.navigate(['']);
       localStorage.setItem('auth', JSON.stringify(resp));
+      console.log(resp);
       },
       error => { 
         window.alert("Credenciales Incorrectas."); 
@@ -109,6 +110,7 @@ export class AuthService {
       phone: user.phone,
       state: user.state,
       type_user_id: user.type_user_id,
+      permission: null,
       created_at: user.created_at,
       updated_at: user.updated_at,
       token: user.token

@@ -25,6 +25,10 @@ export class MascotasComponent implements OnInit {
   pets: MatTableDataSource<Pet>;
   //petsOwner: Pet[];
 
+  //Variables que definen el acceso del usuario
+  permCreate:Boolean = false;
+  permUpdate:Boolean = false;
+
   constructor(
     private petsService: PetsService,
     private dialog: MatDialog) { }
@@ -33,6 +37,12 @@ export class MascotasComponent implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('auth'));
+    if(this.user.permission.find(per => per.registro == "pets").create) {
+      this.permCreate = true;
+    }
+    if(this.user.permission.find(per => per.registro == "pets").update) {
+      this.permUpdate = true;
+    }
     this.getAll();
     //this.getByOwner();
   }
