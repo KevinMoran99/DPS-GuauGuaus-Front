@@ -19,10 +19,16 @@ import { AsuedocDialogComponent } from './asuedoc-dialog/asuedoc-dialog.componen
 export class AsuetosDoctoresComponent implements OnInit {
 
   //columns to display in the table
-  columnsToDisplay = ['day', 'start_hour', 'finish_hour', 'state', 'edit'];
+  columnsToDisplay = ['day', 'start_hour', 'finish_hour', 'state'];
   //current objects
   user: User;
   specials: MatTableDataSource<Special>;
+  
+  //Usuario logeado
+  loggedUser: User;
+  //Variables que definen el acceso del usuario
+  permCreate:Boolean = false;
+  permUpdate:Boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,6 +41,16 @@ export class AsuetosDoctoresComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit(): void {
+    //Auth
+    this.user = JSON.parse(localStorage.getItem('auth'));
+    if(this.user.permission.find(per => per.registro == "special").create) {
+      this.permCreate = true;
+    }
+    if(this.user.permission.find(per => per.registro == "special").update) {
+      this.permUpdate = true;
+      this.columnsToDisplay.push('edit');
+    }
+
     this.route.paramMap.subscribe(params => {
       let id = +params.get('userId');
       this.usersService.get(id).subscribe(

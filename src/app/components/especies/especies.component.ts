@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Specie } from '../../models/specie.model';
+import { User } from 'src/app/models/user.model';
 //from here we get the data
 import { SpeciesService } from '../../services/species.service';
 import { EspeciesDialogComponent } from './especies-dialog/especies-dialog.component';
@@ -17,10 +18,16 @@ import { ModalSettings } from '../../helpers/settings';
 
 export class EspeciesComponent implements OnInit {
   //columns to display in the table
-  columnsToDisplay = ['name', 'state', 'edit'];
+  columnsToDisplay = ['name', 'state'];
   //specie objects
   specie: Specie;
   species: MatTableDataSource<Specie>;
+  
+  //Usuario logeado
+  user: User;
+  //Variables que definen el acceso del usuario
+  permCreate:Boolean = false;
+  permUpdate:Boolean = false;
 
   constructor(
     private speciesService: SpeciesService,
@@ -29,6 +36,15 @@ export class EspeciesComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit(){
+    //Auth
+    this.user = JSON.parse(localStorage.getItem('auth'));
+    if(this.user.permission.find(per => per.registro == "species").create) {
+      this.permCreate = true;
+    }
+    if(this.user.permission.find(per => per.registro == "species").update) {
+      this.permUpdate = true;
+      this.columnsToDisplay.push('edit');
+    }
     this.getAll();
   }
 

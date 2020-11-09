@@ -17,11 +17,18 @@ import { ModalSettings } from '../../helpers/settings';
 export class UsuariosComponent implements OnInit {
 
   //columns to display in the table
-  columnsToDisplay = ['name', 'lastname', 'email', 'type_user', 'state', 'edit', 'schedules', 'specials'];
+  columnsToDisplay = ['name', 'lastname', 'email', 'type_user', 'state'];
   //user objects
   user: User;
   users: MatTableDataSource<User>;
-  isdoctor = false;
+
+  //Usuario logeado
+  loggedUser: User;
+  //Variables que definen el acceso del usuario
+  permCreate:Boolean = false;
+  permUpdate:Boolean = false;
+  permSched:Boolean  = false;
+  permSpec:Boolean   = false;
 
   constructor(
     private usersService: UsersService,
@@ -30,6 +37,27 @@ export class UsuariosComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit() {
+    //Auth
+    this.user = JSON.parse(localStorage.getItem('auth'));
+    if(this.user.permission.find(per => per.registro == "users").create) {
+      this.permCreate = true;
+    }
+    if(this.user.permission.find(per => per.registro == "users").update) {
+      this.permUpdate = true;
+      this.columnsToDisplay.push('edit');
+    }
+    try {
+      if(this.user.permission.find(per => per.registro == "schedules").read) {
+        this.permSched = true;
+        this.columnsToDisplay.push('schedules');
+      }
+    } catch{}
+    try {
+      if(this.user.permission.find(per => per.registro == "special").read) {
+        this.permSpec = true;
+        this.columnsToDisplay.push('specials');
+      }
+    } catch{}
     this.getAll();
   }
 

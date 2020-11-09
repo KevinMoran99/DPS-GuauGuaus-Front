@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ModalSettings } from 'src/app/helpers/settings';
 import { UserType } from 'src/app/models/user-type.model';
+import { User } from 'src/app/models/user.model';
 import { UserTypesService } from 'src/app/services/user-types.service';
 import { TipoUsuarioDialogComponent } from './tipo-usuario-dialog/tipo-usuario-dialog.component';
 
@@ -15,10 +16,16 @@ import { TipoUsuarioDialogComponent } from './tipo-usuario-dialog/tipo-usuario-d
 export class TipoUsuarioComponent implements OnInit {
 
     //columns to display in the table
-    columnsToDisplay = ['name', 'state', 'edit'];
+    columnsToDisplay = ['name', 'state'];
     //specie objects
     userType: UserType;
     userTypes: MatTableDataSource<UserType>;
+
+    //Usuario logeado
+    user: User;
+    //Variables que definen el acceso del usuario
+    permCreate:Boolean = false;
+    permUpdate:Boolean = false;
   
     constructor(
       private userTypesService: UserTypesService,
@@ -27,6 +34,15 @@ export class TipoUsuarioComponent implements OnInit {
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   
     ngOnInit(){
+      //Auth
+      this.user = JSON.parse(localStorage.getItem('auth'));
+      if(this.user.permission.find(per => per.registro == "users_types").create) {
+        this.permCreate = true;
+      }
+      if(this.user.permission.find(per => per.registro == "users_types").update) {
+        this.permUpdate = true;
+        this.columnsToDisplay.push('edit');
+      }
       this.getAll();
     }
   

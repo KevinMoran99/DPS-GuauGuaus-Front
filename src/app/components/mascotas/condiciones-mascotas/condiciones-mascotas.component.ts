@@ -8,6 +8,7 @@ import { Pet } from '../../../models/pet.model';
 import { PetsService } from '../../../services/pets.service';
 import { PetDetailsService } from '../../../services/pet-details.service';
 import { PetDetail } from 'src/app/models/pet-detail.model';
+import { User } from 'src/app/models/user.model';
 import { CondmasDialogComponent } from './condmas-dialog/condmas-dialog.component';
 //here are stored all our modal settings
 import { ModalSettings } from '../../../helpers/settings';
@@ -20,10 +21,16 @@ import { ModalSettings } from '../../../helpers/settings';
 export class CondicionesMascotasComponent implements OnInit {
 
   //columns to display in the table
-  columnsToDisplay = ['name', 'observations', 'state', 'edit'];
+  columnsToDisplay = ['name', 'observations', 'state'];
   //current objects
   pet: Pet;
   details: MatTableDataSource<PetDetail>;
+
+  //Usuario logeado
+  user: User;
+  //Variables que definen el acceso del usuario
+  permCreate:Boolean = false;
+  permUpdate:Boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,6 +43,17 @@ export class CondicionesMascotasComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit(): void {
+
+    //Auth
+    this.user = JSON.parse(localStorage.getItem('auth'));
+    if(this.user.permission.find(per => per.registro == "pet_details").create) {
+      this.permCreate = true;
+    }
+    if(this.user.permission.find(per => per.registro == "pet_details").update) {
+      this.permUpdate = true;
+      this.columnsToDisplay.push('edit');
+    }
+
     this.route.paramMap.subscribe(params => {
       let id = +params.get('petId');
       this.petsService.get(id).subscribe(

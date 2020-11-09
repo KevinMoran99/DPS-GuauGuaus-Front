@@ -26,24 +26,24 @@
               <th mat-header-cell *matHeaderCellDef>Estado</th>
               <td mat-cell *matCellDef="let item">{{item.state ? "Activo" : "Inactivo"}} </td>
             </ng-container>
-            <ng-container matColumnDef="edit">
+            <ng-container matColumnDef="edit" *ngIf="permUpdate">
                 <th mat-header-cell *matHeaderCellDef>Editar</th>
                 <button class="edit" *matCellDef="let item" mat-mini-fab color="accent" aria-label="Update Specie" (click)="openDialog(item)">
                     <mat-icon>edit</mat-icon>
                 </button>
             </ng-container>
-            <ng-container matColumnDef="schedules">
+            <ng-container matColumnDef="schedules" *ngIf="permSched">
               <th mat-header-cell *matHeaderCellDef>Horarios</th>
               <td mat-cell *matCellDef="let item">
-                <button class="schedules" mat-mini-fab color="accent" aria-label="Update Specie" [routerLink]="['/horarios-doctores', item.id]">
+                <button class="schedules" *ngIf="item.type_user.name == 'Doctor'" mat-mini-fab color="accent" aria-label="Update Specie" [routerLink]="['/horarios-doctores', item.id]">
                     <mat-icon>event</mat-icon>
                 </button>
               </td>
           </ng-container>
-          <ng-container matColumnDef="specials">
+          <ng-container matColumnDef="specials" *ngIf="permSpec">
             <th mat-header-cell *matHeaderCellDef>Especiales</th>
             <td mat-cell *matCellDef="let item">
-              <button class="specials" mat-mini-fab color="accent" aria-label="Update Specie" [routerLink]="['/especiales-doctores', item.id]">
+              <button class="specials" *ngIf="item.type_user.name == 'Doctor'" mat-mini-fab color="accent" aria-label="Update Specie" [routerLink]="['/especiales-doctores', item.id]">
                   <mat-icon>alarm_on</mat-icon>
               </button>
             </td>
@@ -62,7 +62,7 @@
             </mat-paginator>
             <br>
           </div>
-          <div class="fav-icon">
+          <div class="fav-icon" *ngIf="permCreate">
             <button mat-fab color="accent" aria-label="Add species" (click)="openDialog()">
               <mat-icon>add</mat-icon>
             </button>

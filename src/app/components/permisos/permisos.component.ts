@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Permission } from '../../models/permission';
+import { User } from 'src/app/models/user.model';
 //from here we get the data
 import { PermissionsService } from '../../services/permissions.service';
 import { PermisosDialogComponent } from './permisos-dialog/permisos-dialog.component';
@@ -16,10 +17,16 @@ import { ModalSettings } from '../../helpers/settings';
 })
 export class PermisosComponent implements OnInit {
  //columns to display in the table
- columnsToDisplay = ['registro', 'create', 'read', 'update', 'delete', 'type_user', 'state', 'edit'];
+ columnsToDisplay = ['registro', 'create', 'read', 'update', 'delete', 'type_user', 'state'];
  //user objects
  permission: Permission;
  permissions: MatTableDataSource<Permission>;
+
+ //Usuario logeado
+ user: User;
+ //Variables que definen el acceso del usuario
+ permCreate:Boolean = false;
+ permUpdate:Boolean = false;
 
  constructor(
    private permissionsService: PermissionsService,
@@ -28,6 +35,15 @@ export class PermisosComponent implements OnInit {
  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
  ngOnInit() {
+   //Auth
+   this.user = JSON.parse(localStorage.getItem('auth'));
+   if(this.user.permission.find(per => per.registro == "permissions").create) {
+     this.permCreate = true;
+   }
+   if(this.user.permission.find(per => per.registro == "permissions").update) {
+     this.permUpdate = true;
+     this.columnsToDisplay.push('edit');
+   }
    this.getAll();
  }
 

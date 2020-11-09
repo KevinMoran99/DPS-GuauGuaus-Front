@@ -13,7 +13,7 @@ import { Userl } from 'src/app/models/userl';
 })
 export class SidenavComponent  {
   user:User;
-  userl:Userl;
+  //userl:Userl;
   isLoggedIn$: Observable<boolean>;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe( 
@@ -22,6 +22,7 @@ export class SidenavComponent  {
     );
   
   //Variables que definen el acceso del usuario
+  permMyPets:Boolean  = false;
   permPets:Boolean    = false;
   permApp:Boolean     = false;
   permUser:Boolean    = false;
@@ -36,34 +37,53 @@ export class SidenavComponent  {
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn;
     this.user = JSON.parse(localStorage.getItem('auth'));
-    this.userl = JSON.parse(localStorage.getItem('auth'));
+    //this.userl = JSON.parse(localStorage.getItem('auth'));
     console.table(this.user);
 
     //Verificando los permisos del usuario
-    if(this.user.permission.find(per => per.registro == "pets").read) {
-      this.permPets = true;
+    if(this.user.type_user_id == 3 || this.user.uid != null) {
+      this.permMyPets = true;
     }
-    if(this.user.permission.find(per => per.registro == "appointment").read) {
-      this.permApp = true;
-    }
-    if(this.user.permission.find(per => per.registro == "users").read) {
-      this.permUser = true;
-    }
-    if(this.user.permission.find(per => per.registro == "users_types").read) {
-      this.permUsType = true;
-    }
-    if(this.user.permission.find(per => per.registro == "permissions").read) {
-      this.permPerm = true;
-    }
-    if(this.user.permission.find(per => per.registro == "species").read) {
-      this.permSpec = true;
-    }
-    if(this.user.permission.find(per => per.registro == "medical_condition").read) {
-      this.permCond = true;
-    }
-    if(this.user.permission.find(per => per.registro == "appointment_types").read) {
-      this.permAppType = true;
-    }
+    try{
+      if(this.user.permission.find(per => per.registro == "pets").read) {
+        this.permPets = true;
+      }
+    } catch{}
+    try{
+      if(this.user.permission.find(per => per.registro == "appointment").read) {
+        this.permApp = true;
+      }
+    } catch{}
+    try{
+      if(this.user.permission.find(per => per.registro == "users").read) {
+        this.permUser = true;
+      }
+    } catch{}
+    try{
+      if(this.user.permission.find(per => per.registro == "users_types").read) {
+        this.permUsType = true;
+      }
+    } catch{}
+    try{
+      if(this.user.permission.find(per => per.registro == "permissions").read) {
+        this.permPerm = true;
+      }
+    } catch{}
+    try{
+      if(this.user.permission.find(per => per.registro == "species").read) {
+        this.permSpec = true;
+      }
+    } catch{}
+    try{
+      if(this.user.permission.find(per => per.registro == "medical_condition").read) {
+        this.permCond = true;
+      }
+    } catch{}
+    try{
+      if(this.user.permission.find(per => per.registro == "appointment_types").read) {
+        this.permAppType = true;
+      }
+    } catch{}
   }
 
   onLogout() {

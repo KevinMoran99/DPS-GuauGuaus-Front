@@ -15,4 +15,10 @@ export class User {
     created_at: Date;
     updated_at: Date;
     token: string;
+
+    //Google fields
+    uid: string;
+    displayName: string;
+    photoURL: string;
+    emailVerified: boolean;
 }

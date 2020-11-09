@@ -19,10 +19,16 @@ import { HoradocDialogComponent } from './horadoc-dialog/horadoc-dialog.componen
 export class HorariosDoctoresComponent implements OnInit {
 
   //columns to display in the table
-  columnsToDisplay = ['day', 'start_hour', 'finish_hour', 'state', 'edit'];
+  columnsToDisplay = ['day', 'start_hour', 'finish_hour', 'state'];
   //current objects
   user: User;
   schedules: MatTableDataSource<Schedule>;
+  
+  //Usuario logeado
+  loggedUser: User;
+  //Variables que definen el acceso del usuario
+  permCreate:Boolean = false;
+  permUpdate:Boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,6 +41,16 @@ export class HorariosDoctoresComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit(): void {
+    //Auth
+    this.user = JSON.parse(localStorage.getItem('auth'));
+    if(this.user.permission.find(per => per.registro == "schedules").create) {
+      this.permCreate = true;
+    }
+    if(this.user.permission.find(per => per.registro == "schedules").update) {
+      this.permUpdate = true;
+      this.columnsToDisplay.push('edit');
+    }
+
     this.route.paramMap.subscribe(params => {
       let id = +params.get('userId');
       this.usersService.get(id).subscribe(

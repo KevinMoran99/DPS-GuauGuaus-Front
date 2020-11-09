@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ModalSettings } from 'src/app/helpers/settings';
 import { AppointmentTypes } from 'src/app/models/appointment-types.model';
+import { User } from 'src/app/models/user.model';
 import { AppointmentTypesService } from 'src/app/services/appointment-types.service';
 import { TiposCitaDialogComponent } from './tipos-cita-dialog/tipos-cita-dialog.component';
 
@@ -15,10 +16,16 @@ import { TiposCitaDialogComponent } from './tipos-cita-dialog/tipos-cita-dialog.
 export class TiposCitaComponent implements OnInit {
 
   //columns to display in the table
-  columnsToDisplay = ['name','duration', 'state', 'edit'];
+  columnsToDisplay = ['name','duration', 'state'];
   //specie objects
   appointmentType: AppointmentTypes;
   appointmentTypes: MatTableDataSource<AppointmentTypes>;
+  
+  //Usuario logeado
+  user: User;
+  //Variables que definen el acceso del usuario
+  permCreate:Boolean = false;
+  permUpdate:Boolean = false;
 
   constructor(
     private appointmentTypeService: AppointmentTypesService,
@@ -27,6 +34,15 @@ export class TiposCitaComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit(){
+    //Auth
+    this.user = JSON.parse(localStorage.getItem('auth'));
+    if(this.user.permission.find(per => per.registro == "appointment_types").create) {
+      this.permCreate = true;
+    }
+    if(this.user.permission.find(per => per.registro == "appointment_types").update) {
+      this.permUpdate = true;
+      this.columnsToDisplay.push('edit');
+    }
     this.getAll();
   }
 

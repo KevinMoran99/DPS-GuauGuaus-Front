@@ -29,7 +29,7 @@
                   </button>
                 </td>
             </ng-container>
-            <ng-container matColumnDef="conditions">
+            <ng-container matColumnDef="conditions" *ngIf="permCondit">
                 <th mat-header-cell *matHeaderCellDef>Condiciones</th>
                 <td mat-cell *matCellDef="let item">
                   <button class="conditions" mat-mini-fab color="accent" aria-label="Update Specie" [routerLink]="['/condiciones-mascotas', item.id]">

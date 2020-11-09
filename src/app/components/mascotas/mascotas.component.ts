@@ -17,17 +17,20 @@ import { User } from 'src/app/models/user.model';
   styleUrls: ['./mascotas.component.css']
 })
 export class MascotasComponent implements OnInit {
-  user: User;
+  
   //columns to display in the table
-  columnsToDisplay = ['name', 'specie', 'owner', 'state', 'edit', 'conditions'];
+  columnsToDisplay = ['name', 'specie', 'owner', 'state'];
   //pet objects
   pet: Pet;
   pets: MatTableDataSource<Pet>;
   //petsOwner: Pet[];
 
+  //Usuario logeado
+  user: User;
   //Variables que definen el acceso del usuario
   permCreate:Boolean = false;
   permUpdate:Boolean = false;
+  permCondit:Boolean = false;
 
   constructor(
     private petsService: PetsService,
@@ -36,13 +39,21 @@ export class MascotasComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit() {
+    //Auth
     this.user = JSON.parse(localStorage.getItem('auth'));
     if(this.user.permission.find(per => per.registro == "pets").create) {
       this.permCreate = true;
     }
     if(this.user.permission.find(per => per.registro == "pets").update) {
       this.permUpdate = true;
+      this.columnsToDisplay.push('edit');
     }
+    try {
+      if(this.user.permission.find(per => per.registro == "pet_details").read) {
+        this.permCondit = true;
+        this.columnsToDisplay.push('conditions');
+      }
+    } catch{}
     this.getAll();
     //this.getByOwner();
   }

@@ -113,7 +113,12 @@ export class AuthService {
       permission: null,
       created_at: user.created_at,
       updated_at: user.updated_at,
-      token: user.token
+      token: user.token,
+
+      uid: null,
+      displayName: null,
+      photoURL: null,
+      emailVerified: null
     }
     return userRef.set(userData, {
       merge: true
