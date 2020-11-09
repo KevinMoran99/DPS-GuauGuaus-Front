@@ -1,20 +1,24 @@
-<h3 class="title">Mis mascotas</h3>
 <div class="container">
-    
+  <div *ngIf="pets;else error">
+    <h3 class="title">Mis mascotas</h3>
     <mat-grid-list [cols]="columns" rowHeight="225px" (window:resize)="onResize($event)">
-        <mat-grid-tile *ngFor="let item of pets" >
-          <mat-card (click)="petDetails(item)">
-              <img id="avatar" mat-card-avatar src="http://35.193.100.234/DPS-GuauGuaus-Back/public/{{item.photo}}" onerror="this.onerror=null; this.src='assets/img/default.png'" alt="User Avatar">
-              <mat-card-title>
-                  {{item.name}}
-              </mat-card-title>
-          </mat-card>
-        </mat-grid-tile>
-      </mat-grid-list>
-      <div class="fav-icon">
-        <button mat-fab color="accent" aria-label="Add species" (click)="openDialog()">
-          <mat-icon>add</mat-icon>
-        </button>
-      </div>
+      <mat-grid-tile *ngFor="let item of pets">
+        <mat-card (click)="petDetails(item)">
+          <img id="avatar" mat-card-avatar src="http://35.193.100.234/DPS-GuauGuaus-Back/public/{{item.photo}}"
+            onerror="this.onerror=null; this.src='assets/img/default.png'" alt="User Avatar">
+          <mat-card-title>
+            {{item.name}}
+          </mat-card-title>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <ng-template #error>
+    <h3 class="title">No hay mascotas que mostrar</h3>
+  </ng-template>
+  <div class="fav-icon">
+    <button mat-fab color="accent" aria-label="Add species" (click)="openDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 </div>
-

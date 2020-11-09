@@ -1,46 +1,48 @@
 <mat-card style="display: none"></mat-card>
 <div class="header">
-    <img id="avatar" mat-card-avatar src="http://35.193.100.234/DPS-GuauGuaus-Back/public/{{pet.photo}}"
+  <img id="avatar" mat-card-avatar src="http://35.193.100.234/DPS-GuauGuaus-Back/public/{{pet.photo}}"
     onerror="this.onerror=null; this.src='assets/img/default.png'" alt="User Avatar">
-    <br>
-    <mat-card-title id="name">
-        {{pet.name}}
-      </mat-card-title>
+  <br>
+  <mat-card-title id="name">
+    {{pet.name}}
+  </mat-card-title>
 </div>
 <div class="container">
-    <mat-grid-list [cols]="columns" rowHeight="125px" (window:resize)="onResize($event)">
-        <mat-grid-tile>
-          <mat-card>
-              <mat-card-title>
-                  Especie
-              </mat-card-title>
-              {{pet.species.name}}
-          </mat-card>
-        </mat-grid-tile>
-        <mat-grid-tile>
-            <mat-card>
-                <mat-card-title>
-                    Fecha de nacimiento
-                </mat-card-title>
-                {{datePipe.transform(pet.birthday,"dd-MM-yyyy")}}
-            </mat-card>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-card>
-                <mat-card-title>
-                    Peso
-                </mat-card-title>
-                {{pet.weight}}
-            </mat-card>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-card>
-                <mat-card-title>
-                    Altura
-                </mat-card-title>
-                {{pet.height}}
-            </mat-card>
-          </mat-grid-tile>
-      </mat-grid-list>
+  <mat-grid-list [cols]="columns" rowHeight="125px" (window:resize)="onResize($event)">
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-title>
+          Especie
+        </mat-card-title>
+        {{pet.species.name}}
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-title>
+          Fecha de nacimiento
+        </mat-card-title>
+        {{datePipe.transform(pet.birthday,"dd-MM-yyyy")}}
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-title>
+          Peso
+        </mat-card-title>
+        {{pet.weight}}
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-title>
+          Altura
+        </mat-card-title>
+        {{pet.height}}
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>
-
+<div class="container">
+  <h3 class="title">Citas recientes</h3>
+</div>

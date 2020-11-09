@@ -1,70 +1,75 @@
 <div class="container">
+  <div *ngIf="users;else error">
     <h3 class="title">Usuarios</h3>
-        <table #dataTable mat-table [dataSource]="users">
-            <!--Name Col -->
-            <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef>Nombre</th>
-              <td mat-cell *matCellDef="let item">{{item.name}} </td>
-            </ng-container>
-            <!--Name Col -->
-            <ng-container matColumnDef="lastname">
-              <th mat-header-cell *matHeaderCellDef>Apellido</th>
-              <td mat-cell *matCellDef="let item">{{item.lastname}} </td>
-            </ng-container>
-            <!--Name Col -->
-            <ng-container matColumnDef="email">
-              <th mat-header-cell *matHeaderCellDef>Email</th>
-              <td mat-cell *matCellDef="let item">{{item.email}} </td>
-            </ng-container>
-            <!--Name Col -->
-            <ng-container matColumnDef="type_user">
-              <th mat-header-cell *matHeaderCellDef>Tipo de usuario</th>
-              <td mat-cell *matCellDef="let item">{{item.type_user.name}} </td>
-            </ng-container>
-            <!--Name Col -->
-            <ng-container matColumnDef="state">
-              <th mat-header-cell *matHeaderCellDef>Estado</th>
-              <td mat-cell *matCellDef="let item">{{item.state ? "Activo" : "Inactivo"}} </td>
-            </ng-container>
-            <ng-container matColumnDef="edit" *ngIf="permUpdate">
-                <th mat-header-cell *matHeaderCellDef>Editar</th>
-                <button class="edit" *matCellDef="let item" mat-mini-fab color="accent" aria-label="Update Specie" (click)="openDialog(item)">
-                    <mat-icon>edit</mat-icon>
-                </button>
-            </ng-container>
-            <ng-container matColumnDef="schedules" *ngIf="permSched">
-              <th mat-header-cell *matHeaderCellDef>Horarios</th>
-              <td mat-cell *matCellDef="let item">
-                <button class="schedules" *ngIf="item.type_user.name == 'Doctor'" mat-mini-fab color="accent" aria-label="Update Specie" [routerLink]="['/horarios-doctores', item.id]">
-                    <mat-icon>event</mat-icon>
-                </button>
-              </td>
-          </ng-container>
-          <ng-container matColumnDef="specials" *ngIf="permSpec">
-            <th mat-header-cell *matHeaderCellDef>Especiales</th>
-            <td mat-cell *matCellDef="let item">
-              <button class="specials" *ngIf="item.type_user.name == 'Doctor'" mat-mini-fab color="accent" aria-label="Update Specie" [routerLink]="['/especiales-doctores', item.id]">
-                  <mat-icon>alarm_on</mat-icon>
-              </button>
-            </td>
-        </ng-container>
-          
-            <!-- ROW Info-->
-            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-            <tr mat-row *matRowDef="let rowData; columns: columnsToDisplay;"></tr>
-          </table>
-          <div class="paginator-container">
-            <br>
-            <mat-paginator [length]="100"
-                          [pageSize]="10"
-                          [pageSizeOptions]="[5, 10, 25, 100]"
-                          showFirstLastButtons>
-            </mat-paginator>
-            <br>
-          </div>
-          <div class="fav-icon" *ngIf="permCreate">
-            <button mat-fab color="accent" aria-label="Add species" (click)="openDialog()">
-              <mat-icon>add</mat-icon>
-            </button>
-          </div>
+    <table #dataTable mat-table [dataSource]="users">
+      <!--Name Col -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let item">{{item.name}} </td>
+      </ng-container>
+      <!--Name Col -->
+      <ng-container matColumnDef="lastname">
+        <th mat-header-cell *matHeaderCellDef>Apellido</th>
+        <td mat-cell *matCellDef="let item">{{item.lastname}} </td>
+      </ng-container>
+      <!--Name Col -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let item">{{item.email}} </td>
+      </ng-container>
+      <!--Name Col -->
+      <ng-container matColumnDef="type_user">
+        <th mat-header-cell *matHeaderCellDef>Tipo de usuario</th>
+        <td mat-cell *matCellDef="let item">{{item.type_user.name}} </td>
+      </ng-container>
+      <!--Name Col -->
+      <ng-container matColumnDef="state">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let item">{{item.state ? "Activo" : "Inactivo"}} </td>
+      </ng-container>
+      <ng-container matColumnDef="edit" *ngIf="permUpdate">
+        <th mat-header-cell *matHeaderCellDef>Editar</th>
+        <button class="edit" *matCellDef="let item" mat-mini-fab color="accent" aria-label="Update Specie"
+          (click)="openDialog(item)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </ng-container>
+      <ng-container matColumnDef="schedules" *ngIf="permSched">
+        <th mat-header-cell *matHeaderCellDef>Horarios</th>
+        <td mat-cell *matCellDef="let item">
+          <button class="schedules" *ngIf="item.type_user.name == 'Doctor'" mat-mini-fab color="accent"
+            aria-label="Update Specie" [routerLink]="['/horarios-doctores', item.id]">
+            <mat-icon>event</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="specials" *ngIf="permSpec">
+        <th mat-header-cell *matHeaderCellDef>Especiales</th>
+        <td mat-cell *matCellDef="let item">
+          <button class="specials" *ngIf="item.type_user.name == 'Doctor'" mat-mini-fab color="accent"
+            aria-label="Update Specie" [routerLink]="['/especiales-doctores', item.id]">
+            <mat-icon>alarm_on</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- ROW Info-->
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let rowData; columns: columnsToDisplay;"></tr>
+    </table>
+    <div class="paginator-container">
+      <br>
+      <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+      </mat-paginator>
+      <br>
     </div>
+  </div>
+  <ng-template #error>
+    <h3 class="title">No hay usuarios que mostrar</h3>
+  </ng-template>
+  <div class="fav-icon" *ngIf="permCreate">
+    <button mat-fab color="accent" aria-label="Add species" (click)="openDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

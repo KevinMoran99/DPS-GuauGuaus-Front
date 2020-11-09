@@ -1,44 +1,47 @@
 <div class="container">
+  <div *ngIf="appointmentTypes;else error">
     <h3 class="title">Tipos de cita</h3>
-        <table #dataTable mat-table [dataSource]="appointmentTypes">
-            <!--Name Col -->
-            <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef>Nombre</th>
-              <td mat-cell *matCellDef="let item">{{item.name}} </td>
-            </ng-container>
-            <!--Name Col -->
-            <ng-container matColumnDef="duration">
-                <th mat-header-cell *matHeaderCellDef>Duración en minutos</th>
-                <td mat-cell *matCellDef="let item">{{item.duration + " minuto(s)"}} </td>
-              </ng-container>
-            <!--Name Col -->
-            <ng-container matColumnDef="state">
-              <th mat-header-cell *matHeaderCellDef>Estado</th>
-              <td mat-cell *matCellDef="let item">{{item.state ? "Activo" : "Inactivo"}} </td>
-            </ng-container>
-            <ng-container matColumnDef="edit" *ngIf="permUpdate">
-                <th mat-header-cell *matHeaderCellDef>Editar</th>
-                <button class="edit" *matCellDef="let item" mat-mini-fab color="accent" aria-label="Update appointment type" (click)="openDialog(item)">
-                    <mat-icon>edit</mat-icon>
-                </button>
-            </ng-container>
-          
-            <!-- ROW Info-->
-            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-            <tr mat-row *matRowDef="let rowData; columns: columnsToDisplay;"></tr>
-          </table>
-          <div class="paginator-container">
-            <br>
-            <mat-paginator [length]="100"
-                          [pageSize]="10"
-                          [pageSizeOptions]="[5, 10, 25, 100]"
-                          showFirstLastButtons>
-            </mat-paginator>
-            <br>
-          </div>
-          <div class="fav-icon" *ngIf="permCreate">
-            <button mat-fab color="accent" aria-label="Add species" (click)="openDialog()">
-              <mat-icon>add</mat-icon>
-            </button>
-          </div>
+    <table #dataTable mat-table [dataSource]="appointmentTypes">
+      <!--Name Col -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let item">{{item.name}} </td>
+      </ng-container>
+      <!--Name Col -->
+      <ng-container matColumnDef="duration">
+        <th mat-header-cell *matHeaderCellDef>Duración en minutos</th>
+        <td mat-cell *matCellDef="let item">{{item.duration + " minuto(s)"}} </td>
+      </ng-container>
+      <!--Name Col -->
+      <ng-container matColumnDef="state">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let item">{{item.state ? "Activo" : "Inactivo"}} </td>
+      </ng-container>
+      <ng-container matColumnDef="edit" *ngIf="permUpdate">
+        <th mat-header-cell *matHeaderCellDef>Editar</th>
+        <button class="edit" *matCellDef="let item" mat-mini-fab color="accent" aria-label="Update appointment type"
+          (click)="openDialog(item)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </ng-container>
+
+      <!-- ROW Info-->
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let rowData; columns: columnsToDisplay;"></tr>
+    </table>
+    <div class="paginator-container">
+      <br>
+      <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+      </mat-paginator>
+      <br>
     </div>
+  </div>
+  <ng-template #error>
+    <h3 class="title">No hay tipos de cita que mostrar</h3>
+  </ng-template>
+  <div class="fav-icon" *ngIf="permCreate">
+    <button mat-fab color="accent" aria-label="Add species" (click)="openDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>
