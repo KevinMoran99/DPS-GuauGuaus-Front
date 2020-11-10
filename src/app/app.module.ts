@@ -72,6 +72,7 @@ import { AsuedocDialogComponent } from './components/usuarios/asuetos-doctores/a
 import { MisMascotasComponent } from './components/mis-mascotas/mis-mascotas.component';
 import { DetalleMascotasComponent } from './components/detalle-mascotas/detalle-mascotas.component';
 import { AuthInterceptor } from './helpers/AuthInterceptor';
+import { CitasDialogComponent } from './components/citas/citas-dialog/citas-dialog.component';
 
 
 //imagepicker config
@@ -110,7 +111,8 @@ const config: InputFileConfig = {
     AsuetosDoctoresComponent,
     AsuedocDialogComponent,
     MisMascotasComponent,
-    DetalleMascotasComponent
+    DetalleMascotasComponent,
+    CitasDialogComponent
 
   ],
   imports: [

@@ -35,6 +35,12 @@ export const ModalSettings = {
         title: 'Agregar tipo de usuario',
         disableClose: true
     },
+    citasAddSettings: {
+        height: 'auto',
+        width: '800px',
+        title: 'Agregar cita',
+        disableClose: true
+    },
     permissionAddSettings: {
         height: 'auto',
         width: '800px',

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Appointment } from '../models/appointment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,15 +26,14 @@ export class AppointmentService {
     this.modifier = "/pet/";
     return this.http.get(environment.baseUrl+this.endpoint+this.modifier)+id;
   }
-  //TODO: make appointments model and implement in the functions below
-  /*
-  post(appointment: MedicalCondition) {
-    return this.http.post(environment.baseUrl+this.endpoint,medicalCondition);
+  
+  post(appointment: Appointment) {
+    return this.http.post(environment.baseUrl+this.endpoint,appointment);
   }
 
-  put(medicalCondition: MedicalCondition){
+  put(appointment: Appointment){
     
-    return this.http.put(environment.baseUrl+this.endpoint,medicalCondition);
+    return this.http.put(environment.baseUrl+this.endpoint,appointment);
   }
-  */
+  
 }

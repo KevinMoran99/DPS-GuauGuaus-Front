@@ -1,0 +1,68 @@
+<mat-progress-bar *ngIf="isSending" mode="indeterminate"></mat-progress-bar>
+<h2 mat-dialog-title>{{title}}</h2>
+<form [formGroup]="appointmentForm">
+  <mat-dialog-content>
+    <mat-form-field appearance="fill">
+      <mat-label>Mascota</mat-label>
+      <mat-select formControlName="pet_id">
+        <mat-option *ngFor="let pet of pets" [value]="pet.id">
+          {{pet.name + " (" + pet.owner.name + " " + pet.owner.lastname + ")"}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Tipo de cita</mat-label>
+      <mat-select formControlName="type_id">
+        <mat-option *ngFor="let type of types" [value]="type.id">
+          {{type.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Doctor</mat-label>
+      <mat-select formControlName="doctor_id">
+        <mat-option *ngFor="let doctor of doctors" [value]="doctor.id">
+          {{doctor.name + " " + doctor.lastname}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Fecha de cita</mat-label>
+      <input matInput [matDatepicker]="picker" [min]="minDate" formControlName="appointment_date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Hora de inicio</mat-label>
+        <input type="time" matInput formControlName="appointment_start_hour">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Estado de la cita</mat-label>
+      <mat-select formControlName="status">
+        <mat-option [value]="'Activo'">Activo</mat-option>
+        <mat-option [value]="'Casi terminada'">Casi terminada</mat-option>
+        <mat-option [value]="'Emergencia'">Emergencia</mat-option>
+        <mat-option [value]="'Fallecido'">Fallecido</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Observaciones</mat-label>
+      <textarea matInput formControlName="observations"></textarea>
+    </mat-form-field>
+    <mat-radio-group formControlName="emergency">
+    <label>Emergencia: </label>
+    <mat-radio-button value="1" checked>Si</mat-radio-button>
+    <mat-radio-button value="0">No</mat-radio-button>
+    </mat-radio-group>
+    <br>
+    <mat-radio-group formControlName="state">
+    <label>Estado: </label>
+    <mat-radio-button value="1" checked>Activo</mat-radio-button>
+    <mat-radio-button value="0">Inactivo</mat-radio-button>
+    </mat-radio-group>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button color="error" (click)="close()">Cancelar</button>
+    <button type="submit" mat-raised-button color="primary" (click)="send()" [disabled]="!appointmentForm.valid">Enviar</button>
+  </mat-dialog-actions>
+</form>

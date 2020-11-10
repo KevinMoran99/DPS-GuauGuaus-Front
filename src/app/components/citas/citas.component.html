@@ -1,1 +1,66 @@
-<h3 align="center">Citas</h3>
+<div class="container">
+    <!-- registers? -->
+    <div *ngIf="appointments;else error">
+      <h3 class="title">Citas</h3>
+      <table #dataTable mat-table [dataSource]="appointments">
+        <!--Name Col -->
+        <ng-container matColumnDef="pet">
+          <th mat-header-cell *matHeaderCellDef>Nombre de mascota</th>
+          <td mat-cell *matCellDef="let item">{{item.pet.name}} </td>
+        </ng-container>
+        <!--Name Col -->
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef>Tipo de cita</th>
+          <td mat-cell *matCellDef="let item">{{item.type.name}} </td>
+        </ng-container>
+        <!--Name Col -->
+        <ng-container matColumnDef="doctor">
+          <th mat-header-cell *matHeaderCellDef>Doctor</th>
+          <td mat-cell *matCellDef="let item"><!--{{item.user.name + " " + item.user.lastname}}--> {{item.doctor_id}} </td>
+        </ng-container>
+        <!--Name Col -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Fecha</th>
+          <td mat-cell *matCellDef="let item">{{item.appointment_date | date:'EEEE, MMMM d, y'}}</td>
+        </ng-container>
+        <!--Name Col -->
+        <ng-container matColumnDef="emergency">
+          <th mat-header-cell *matHeaderCellDef>Emergencia</th>
+          <td mat-cell *matCellDef="let item">{{item.emergency ? 'Sí' : 'No'}} </td>
+        </ng-container>
+        <!--Name Col -->
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef>Estado</th>
+          <td mat-cell *matCellDef="let item">{{item.state ? "Activo" : "Inactivo"}} </td>
+        </ng-container>
+        <ng-container matColumnDef="edit" *ngIf="permUpdate">
+          <th mat-header-cell *matHeaderCellDef>Editar</th>
+          <button class="edit" *matCellDef="let item" mat-mini-fab color="accent" aria-label="Update Specie"
+            (click)="openDialog(item)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </ng-container>
+  
+        <!-- ROW Info-->
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let rowData; columns: columnsToDisplay;"></tr>
+      </table>
+      <div class="paginator-container">
+        <br>
+        <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+        </mat-paginator>
+        <br>
+      </div>
+      <!--end of registers?-->
+    </div>
+    <!-- no registers -->
+    <ng-template #error>
+      <h3 class="title">No hay citas que mostrar</h3>
+    </ng-template>
+    <div class="fav-icon" *ngIf="permCreate">
+      <button mat-fab color="accent" aria-label="Add appointments" (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+  

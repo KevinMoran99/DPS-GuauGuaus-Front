@@ -9,6 +9,7 @@ import { AppointmentTypes } from '../models/appointment-types.model';
 export class AppointmentTypesService {
 
   endpoint:string = "appointmenttypes";
+  modifier:string = "";
 
   constructor(
     private http: HttpClient 
@@ -16,6 +17,10 @@ export class AppointmentTypesService {
   
   getAll(){
     return this.http.get(environment.baseUrl+this.endpoint);
+  }
+  getActive(){
+    this.modifier = "/active";
+    return this.http.get(environment.baseUrl+this.endpoint+this.modifier);
   }
   post(appointmentType: AppointmentTypes) {
     return this.http.post(environment.baseUrl+this.endpoint,appointmentType);
