@@ -22,9 +22,9 @@ export class AppointmentService {
     this.modifier = "/active";
     return this.http.get(environment.baseUrl+this.endpoint+this.modifier);
   }
-  byPet(id){
+  byPet(id: Number){
     this.modifier = "/pet/";
-    return this.http.get(environment.baseUrl+this.endpoint+this.modifier)+id;
+    return this.http.get(environment.baseUrl+this.endpoint+this.modifier+id);
   }
   
   post(appointment: Appointment) {

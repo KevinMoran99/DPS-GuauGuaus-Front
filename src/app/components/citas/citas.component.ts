@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,6 +9,7 @@ import { AppointmentService } from '../../services/appointment.service';
 import { CitasDialogComponent } from './citas-dialog/citas-dialog.component';
 //here are stored all our modal settings
 import { ModalSettings } from '../../helpers/settings';
+import { Pet } from 'src/app/models/pet.model';
 
 @Component({
   selector: 'app-citas',
@@ -16,7 +17,7 @@ import { ModalSettings } from '../../helpers/settings';
   styleUrls: ['./citas.component.css']
 })
 export class CitasComponent implements OnInit {
-
+  @Input() pet;
   //columns to display in the table
   columnsToDisplay = ['pet', 'type', 'doctor', 'date', 'emergency', 'state'];
   //appointment objects
@@ -49,7 +50,9 @@ export class CitasComponent implements OnInit {
         this.columnsToDisplay.push('edit');
       }
     } catch{}
-    this.getAll();
+
+    (this.pet as Pet) ?  this.getByPet((this.pet as Pet).id) : this.getAll();
+    
   }
 
   //we try to get all the species from the API
@@ -61,6 +64,18 @@ export class CitasComponent implements OnInit {
       }, error=>{
         if(error.status == 404){
           alert("Error al obtener los datos del servidor");
+        }
+      });
+  }
+  getByPet(id){
+    this.appointmentService.byPet(id).subscribe(
+      result => {
+        console.log(result);
+        this.appointments = new MatTableDataSource<Appointment>(result as Appointment[]);
+        this.appointments.paginator = this.paginator;
+      }, error=>{
+        if(error.status == 404){
+          //alert("Error al obtener los datos del servidor");
         }
       });
   }
