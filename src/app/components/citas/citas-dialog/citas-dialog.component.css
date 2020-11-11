@@ -7,3 +7,13 @@ mat-form-field{
 mat-radio-button{
     margin: 20px;
 }
+h3 {
+    margin-left: 3em;
+}
+.sched, .sched table {
+    background-color:#e2e2e2;
+    border-radius: 5px;
+    margin-bottom: 2em;
+    padding-top: 1em;
+    padding-bottom: 0.5em;
+}

@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngIf="userTypes;else error">
+  <div [hidden]="!userTypes">
     <h3 class="title">Tipos de usuario</h3>
     <table #dataTable mat-table [dataSource]="userTypes">
       <!--Name Col -->
@@ -14,10 +14,21 @@
       </ng-container>
       <ng-container matColumnDef="edit" *ngIf="permUpdate">
         <th mat-header-cell *matHeaderCellDef>Editar</th>
-        <button class="edit" *matCellDef="let item" mat-mini-fab color="accent" aria-label="Update Specie"
-          (click)="openDialog(item)">
-          <mat-icon>edit</mat-icon>
-        </button>
+        <td mat-cell *matCellDef="let item">
+          <button class="edit" mat-mini-fab color="accent" aria-label="Update Specie"
+            (click)="openDialog(item)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="permissions">
+        <th mat-header-cell *matHeaderCellDef>Permisos</th>
+        <td mat-cell *matCellDef="let item">
+          <button class="permissions" mat-mini-fab color="accent" aria-label="Update Specie"
+          [routerLink]="['/permisos', item.id]">
+            <mat-icon>pan_tool</mat-icon>
+          </button>
+        </td>
       </ng-container>
 
       <!-- ROW Info-->
@@ -31,9 +42,9 @@
       <br>
     </div>
   </div>
-  <ng-template #error>
+  <div *ngIf="!userTypes">
     <h3 class="title">No hay tipos de usuario que mostrar</h3>
-  </ng-template>
+  </div>
   <div class="fav-icon" *ngIf="permCreate">
     <button mat-fab color="accent" aria-label="Add species" (click)="openDialog()">
       <mat-icon>add</mat-icon>

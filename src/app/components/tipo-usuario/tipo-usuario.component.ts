@@ -26,10 +26,11 @@ export class TipoUsuarioComponent implements OnInit {
     //Variables que definen el acceso del usuario
     permCreate:Boolean = false;
     permUpdate:Boolean = false;
+    permPerm:Boolean   = false;
   
     constructor(
       private userTypesService: UserTypesService,
-      private dialog: MatDialog,) { }
+      private dialog: MatDialog) { }
       
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   
@@ -43,6 +44,12 @@ export class TipoUsuarioComponent implements OnInit {
         this.permUpdate = true;
         this.columnsToDisplay.push('edit');
       }
+      try {
+        if(this.user.permission.find(per => per.registro == "permissions").read) {
+          this.permPerm = true;
+          this.columnsToDisplay.push('permissions');
+        }
+      } catch{}
       this.getAll();
     }
   
@@ -58,6 +65,7 @@ export class TipoUsuarioComponent implements OnInit {
           }
         });
     }
+
 
     /* GET ACTIVE USER-TYPES METHOD */
     /*

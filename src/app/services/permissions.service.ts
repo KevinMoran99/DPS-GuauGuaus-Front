@@ -17,6 +17,13 @@ export class PermissionsService {
   getAll(){
     return this.http.get(environment.baseUrl+this.endpoint);
   }
+  get(id: Number) {
+    return this.http.get(environment.baseUrl+this.endpoint+'/'+id);
+  }
+  getByType(id: Number){
+    this.modifier = "/users/";
+    return this.http.get(environment.baseUrl+this.endpoint+this.modifier+id);
+  }
   getActive(){
     this.modifier = "/active";
     return this.http.get(environment.baseUrl+this.endpoint+this.modifier);

@@ -21,6 +21,9 @@ export class PermisosDialogComponent implements OnInit {
   permission = new Permission();
   isSending: boolean = false;
 
+  //Si se viene del crud de tipos de usuario
+  userType: UserType;
+
   //Validating form
   permissionForm: FormGroup = this.formBuilder.group({
     registro: [, { validators: [Validators.required, Validators.minLength(3), Validators.maxLength(25)], updateOn: "change" }],
@@ -63,6 +66,9 @@ export class PermisosDialogComponent implements OnInit {
       this.permissionForm.controls['users_types_id'].setValue(this.permission.users_types_id);
       this.permissionForm.controls['state'].setValue(this.permission.state ? '1' : '0');
     }
+
+    //if comes from userType
+    this.permissionForm.controls['users_types_id'].setValue(this.userType.id);
   }
 
   send(){

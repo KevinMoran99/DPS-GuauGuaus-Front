@@ -43,7 +43,7 @@
                 <mat-radio-button value="0">Denegar</mat-radio-button>
               </mat-radio-group>
             <br>
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="fill" *ngIf="!userType">
                 <mat-label>Tipo de usuario</mat-label>
                 <mat-select formControlName="users_types_id">
                     <mat-option *ngFor="let type of userTypes" [value]="type.id">

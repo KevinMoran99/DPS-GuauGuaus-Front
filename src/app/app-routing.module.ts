@@ -34,6 +34,7 @@ const routes: Routes = [
       {path: 'citas', component: CitasComponent, canActivate: [AuthGuard]},
       {path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard]},
       {path: 'permisos', component: PermisosComponent, canActivate: [AuthGuard]},
+      {path: 'permisos/:typeId', component: PermisosComponent, canActivate: [AuthGuard]},
       {path: 'especies', component: EspeciesComponent, canActivate: [AuthGuard]},
       {path: 'about', component: AboutComponent, canActivate: [AuthGuard]},
       {path: 'condicion-medica', component: CondicionMedicaComponent, canActivate: [AuthGuard]},

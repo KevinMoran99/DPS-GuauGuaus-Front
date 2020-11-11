@@ -1,6 +1,6 @@
 <div class="container">
     <!-- registers? -->
-    <div *ngIf="appointments;else error">
+    <div [hidden]="!appointments">
       <h3 class="title">Citas</h3>
       <table #dataTable mat-table [dataSource]="appointments">
         <!--Name Col -->
@@ -26,7 +26,7 @@
         <!--Name Col -->
         <ng-container matColumnDef="date">
           <th mat-header-cell *matHeaderCellDef>Fecha</th>
-          <td mat-cell *matCellDef="let item">{{item.appointment_date | date:'EEEE, MMMM d, y'}}</td>
+          <td mat-cell *matCellDef="let item">{{datePipe.transform(item.appointment_date,"dd/MM/yyyy")}}</td>
         </ng-container>
         <!--Name Col -->
         <ng-container matColumnDef="emergency">
@@ -60,9 +60,9 @@
     </div>
     <!-- no registers -->
     
-    <ng-template #error>
+    <div *ngIf="!appointments">
       <h3 class="title">No hay citas que mostrar</h3>
-    </ng-template>
+    </div>
     <div class="fav-icon" *ngIf="permCreate">
       <button mat-fab color="accent" aria-label="Add appointments" (click)="openDialog()">
         <mat-icon>add</mat-icon>

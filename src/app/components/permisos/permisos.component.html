@@ -1,6 +1,16 @@
 <div class="container">
-  <div *ngIf="permissions;else error">
-    <h3 class="title">Permisos</h3>
+  <div *ngIf="userType">
+    <nav aria-label="breadcrumb">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">
+          <button mat-raised-button color="accent" routerLink='/tipo-usuarios'>Regresar a lista de tipos de usuario</button>
+        </li>
+      </ul>
+    </nav>
+    <h3 class="title">Permisos del tipo de usuario {{userType.name}}</h3>
+  </div>
+  <div [hidden]="!permissions">
+    <h3 class="title" *ngIf="!userType">Permisos</h3>
     <table #dataTable mat-table [dataSource]="permissions">
       <!--Name Col -->
       <ng-container matColumnDef="registro">
@@ -56,9 +66,9 @@
       <br>
     </div>
   </div>
-  <ng-template #error>
+  <div *ngIf="!permissions">
     <h3 class="title">No hay permisos que mostrar</h3>
-  </ng-template>
+  </div>
   <div class="fav-icon" *ngIf="permCreate">
     <button mat-fab color="accent" aria-label="Add species" (click)="openDialog()">
       <mat-icon>add</mat-icon>

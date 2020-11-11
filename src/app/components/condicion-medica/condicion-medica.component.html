@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngIf="medicalConditions;else error">
+  <div [hidden]="!medicalConditions">
     <h3 class="title">Condiciones médicas</h3>
     <table #dataTable mat-table [dataSource]="medicalConditions">
       <!--Name Col -->
@@ -31,9 +31,9 @@
       <br>
     </div>
   </div>
-  <ng-template #error>
+  <div *ngIf="!medicalConditions">
     <h3 class="title">No hay condiciones medicas que mostrar</h3>
-  </ng-template>
+  </div>
   <div class="fav-icon" *ngIf="permCreate">
     <button mat-fab color="accent" aria-label="Add species" (click)="openDialog()">
       <mat-icon>add</mat-icon>

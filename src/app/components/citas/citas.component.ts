@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -14,7 +15,8 @@ import { Pet } from 'src/app/models/pet.model';
 @Component({
   selector: 'app-citas',
   templateUrl: './citas.component.html',
-  styleUrls: ['./citas.component.css']
+  styleUrls: ['./citas.component.css'],
+  providers:[DatePipe]
 })
 export class CitasComponent implements OnInit {
   @Input() pet;
@@ -32,7 +34,8 @@ export class CitasComponent implements OnInit {
 
   constructor(
     private appointmentService: AppointmentService,
-    private dialog: MatDialog,) { }
+    private dialog: MatDialog,
+    public datePipe: DatePipe) { }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 

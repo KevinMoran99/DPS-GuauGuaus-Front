@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngIf="appointmentTypes;else error">
+  <div [hidden]="!appointmentTypes">
     <h3 class="title">Tipos de cita</h3>
     <table #dataTable mat-table [dataSource]="appointmentTypes">
       <!--Name Col -->
@@ -36,9 +36,9 @@
       <br>
     </div>
   </div>
-  <ng-template #error>
+  <div *ngIf="!appointmentTypes">
     <h3 class="title">No hay tipos de cita que mostrar</h3>
-  </ng-template>
+  </div>
   <div class="fav-icon" *ngIf="permCreate">
     <button mat-fab color="accent" aria-label="Add species" (click)="openDialog()">
       <mat-icon>add</mat-icon>

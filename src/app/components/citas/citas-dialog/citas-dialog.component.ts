@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -11,11 +12,14 @@ import { AppointmentTypes } from 'src/app/models/appointment-types.model';
 import { AppointmentTypesService } from 'src/app/services/appointment-types.service';
 import { User } from 'src/app/models/user.model';
 import { UsersService } from 'src/app/services/users.service';
+import { SchedulesService } from 'src/app/services/schedules.service'
+import { Schedule } from 'src/app/models/schedule.module';
 
 @Component({
   selector: 'app-citas-dialog',
   templateUrl: './citas-dialog.component.html',
-  styleUrls: ['./citas-dialog.component.css']
+  styleUrls: ['./citas-dialog.component.css'],
+  providers:[DatePipe]
 })
 export class CitasDialogComponent implements OnInit {
 
@@ -27,8 +31,12 @@ export class CitasDialogComponent implements OnInit {
   pets: Pet[];
   types: AppointmentTypes[];
   doctors: User[];
+  schedules: Schedule[];
 
   minDate: Date = new Date();
+
+  //columns to display in the table
+  columnsToDisplay = ['day', 'start_hour', 'finish_hour'];
 
   //validating form
   appointmentForm: FormGroup = this.formBuilder.group({
@@ -50,7 +58,9 @@ export class CitasDialogComponent implements OnInit {
     private petsService: PetsService,
     private typesService: AppointmentTypesService,
     private usersService: UsersService,
-    private _snackBar: MatSnackBar) { }
+    private schedulesService: SchedulesService,
+    private _snackBar: MatSnackBar,
+    public datePipe: DatePipe) { }
 
   ngOnInit(): void {
     //populating selects
@@ -92,6 +102,7 @@ export class CitasDialogComponent implements OnInit {
       this.appointmentForm.controls['pet_id'].setValue(this.appointment.pet_id);
       this.appointmentForm.controls['doctor_id'].setValue(this.appointment.doctor_id);
       this.appointmentForm.controls['state'].setValue(this.appointment.state ? '1' : '0');
+      this.getSchedules();
     }
   }
   
@@ -157,6 +168,21 @@ export class CitasDialogComponent implements OnInit {
       );
     }
   }
+
+  getSchedules(){
+    this.schedulesService.getActiveByUser(this.appointmentForm.controls['doctor_id'].value).subscribe(
+      result => {
+        this.schedules = result as Schedule[];
+      }, error=>{
+        if(error.status == 404){
+          this.openSnackBar('El doctor seleccionado no tiene horarios asignados.', 'Cerrar');
+        }
+        else {
+          alert('Ocurrió un error inesperado.');
+        }
+      });
+    }
+
   //exit the modal
   close(){
     this.dialogRef.close();

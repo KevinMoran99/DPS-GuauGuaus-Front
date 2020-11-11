@@ -55,3 +55,7 @@
 #avatar{
   margin-bottom: 10px;
 }
+
+mat-icon {
+  margin-right: 5px;
+}

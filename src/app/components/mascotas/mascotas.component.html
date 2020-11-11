@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngIf="pets;else error">
+  <div [hidden]="!pets">
     <h3 class="title">Mascotas</h3>
     <table #dataTable mat-table [dataSource]="pets">
       <!--Name Col -->
@@ -53,9 +53,9 @@
       <br>
     </div>
   </div>
-  <ng-template #error>
+  <div *ngIf="!pets">
     <h3 class="title">No hay mascotas que mostrar</h3>
-  </ng-template>
+  </div>
   <div class="fav-icon" *ngIf="permCreate">
     <button mat-fab color="accent" aria-label="Add species" (click)="openDialog()">
       <mat-icon>add</mat-icon>

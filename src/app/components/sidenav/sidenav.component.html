@@ -13,20 +13,20 @@
     </div>
     <mat-divider></mat-divider>
     <mat-nav-list>
-      <a mat-list-item routerLink="/mis-mascotas">Mis mascotas</a>
+      <a mat-list-item routerLink="/mis-mascotas"><mat-icon>pets</mat-icon>Mis mascotas</a>
       <a mat-list-item routerLink="/dashboard">Dashboard</a>
-      <a mat-list-item routerLink="/mascotas" *ngIf="permPets">Mascotas</a>
-      <a mat-list-item routerLink="/citas" *ngIf="permApp">Citas</a>
-      <a mat-list-item routerLink="/usuarios" *ngIf="permUser">Usuarios</a>
-      <a mat-list-item routerLink="/tipo-usuarios" *ngIf="permUsType">Tipos de usuario</a>
-      <a mat-list-item routerLink="/permisos" *ngIf="permPerm">Permisos</a>
-      <a mat-list-item routerLink="/especies" *ngIf="permSpec">Especies</a>
-      <a mat-list-item routerLink="/condicion-medica" *ngIf="permCond">Condicion medica</a>
-      <a mat-list-item routerLink="/tipo-citas" *ngIf="permAppType">Tipos de cita</a>
+      <a mat-list-item routerLink="/mascotas" *ngIf="permPets"><mat-icon>pets</mat-icon>Mascotas</a>
+      <a mat-list-item routerLink="/citas" *ngIf="permApp"><mat-icon>access_time</mat-icon>Citas</a>
+      <a mat-list-item routerLink="/usuarios" *ngIf="permUser"><mat-icon>person_pin</mat-icon>Usuarios</a>
+      <a mat-list-item routerLink="/tipo-usuarios" *ngIf="permUsType"><mat-icon>contacts</mat-icon>Tipos de usuario</a>
+      <a mat-list-item routerLink="/permisos" *ngIf="permPerm"><mat-icon>pan_tool</mat-icon>Permisos</a>
+      <a mat-list-item routerLink="/especies" *ngIf="permSpec"><mat-icon>pest_control_rodent</mat-icon>Especies</a>
+      <a mat-list-item routerLink="/condicion-medica" *ngIf="permCond"><mat-icon>healing</mat-icon>Condicion medica</a>
+      <a mat-list-item routerLink="/tipo-citas" *ngIf="permAppType"><mat-icon>post_add</mat-icon>Tipos de cita</a>
       <div class="absolute">
         <mat-divider></mat-divider>
-        <a mat-list-item routerLink="/about">Acerca de</a>
-        <a mat-list-item (click)="onLogout()" *ngIf="isLoggedIn">Salir</a>
+        <a mat-list-item routerLink="/about"><mat-icon>help</mat-icon>Acerca de</a>
+        <a mat-list-item (click)="onLogout()" *ngIf="isLoggedIn"><mat-icon>login</mat-icon>Salir</a>
       </div>
     </mat-nav-list>
   </mat-sidenav>

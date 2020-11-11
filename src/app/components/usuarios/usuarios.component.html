@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngIf="users;else error">
+  <div [hidden]="!users">
     <h3 class="title">Usuarios</h3>
     <table #dataTable mat-table [dataSource]="users">
       <!--Name Col -->
@@ -64,9 +64,9 @@
       <br>
     </div>
   </div>
-  <ng-template #error>
+  <div *ngIf="!users">
     <h3 class="title">No hay usuarios que mostrar</h3>
-  </ng-template>
+  </div>
   <div class="fav-icon" *ngIf="permCreate">
     <button mat-fab color="accent" aria-label="Add species" (click)="openDialog()">
       <mat-icon>add</mat-icon>

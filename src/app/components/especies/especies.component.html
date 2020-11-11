@@ -1,6 +1,6 @@
 <div class="container">
   <!-- registers? -->
-  <div *ngIf="species;else error">
+  <div [hidden]="!species">
     <h3 class="title">Especies</h3>
     <table #dataTable mat-table [dataSource]="species">
       <!--Name Col -->
@@ -34,9 +34,9 @@
     <!--end of registers?-->
   </div>
   <!-- no registers -->
-  <ng-template #error>
+  <div *ngIf="!species">
     <h3 class="title">No hay especies que mostrar</h3>
-  </ng-template>
+  </div>
   <div class="fav-icon" *ngIf="permCreate">
     <button mat-fab color="accent" aria-label="Add species" (click)="openDialog()">
       <mat-icon>add</mat-icon>

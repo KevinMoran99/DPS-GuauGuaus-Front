@@ -18,6 +18,9 @@ export class UserTypesService {
   getAll(){
     return this.http.get(environment.baseUrl+this.endpoint);
   }
+  get(id: Number) {
+    return this.http.get(environment.baseUrl+this.endpoint+'/'+id);
+  }
   getActive(){
     this.modifier = "/active";
     return this.http.get(environment.baseUrl+this.endpoint+this.modifier);
