@@ -20,6 +20,8 @@ export class AsuedocDialogComponent implements OnInit {
  special= new Special();
  userId: number;
  isSending: boolean = false;
+ horai: String[];
+ horaf: String[];
 
  //Validating form
  specialForm: FormGroup = this.formBuilder.group({
@@ -56,8 +58,10 @@ export class AsuedocDialogComponent implements OnInit {
    //if comes from edit
    if(this.special.id != undefined){
      this.specialForm.controls['day'].setValue(this.special.day);
-     this.specialForm.controls['start_hour'].setValue(this.special.start_hour);
-     this.specialForm.controls['finish_hour'].setValue(this.special.finish_hour);
+     this.horai=this.special.start_hour.toString().split(":");
+     this.specialForm.controls['start_hour'].setValue(this.horai[0]+":"+this.horai[1]);
+     this.horaf=this.special.finish_hour.toString().split(":");
+     this.specialForm.controls['finish_hour'].setValue(this.horaf[0]+":"+this.horaf[1]);
      this.specialForm.controls['state'].setValue(this.special.state ? '1' : '0');
    }
  }
@@ -66,7 +70,7 @@ export class AsuedocDialogComponent implements OnInit {
  send(){
    this.isSending = true;
    //updating object
-   this.special.doctor_id = this.userId;
+   
    try {
     this.special.day = (this.specialForm.controls['day'].value).toISOString().slice(0,10);
   }
@@ -76,6 +80,7 @@ export class AsuedocDialogComponent implements OnInit {
    this.special.start_hour = this.specialForm.controls['start_hour'].value;
    this.special.finish_hour = this.specialForm.controls['finish_hour'].value;
    this.special.state = this.specialForm.controls['state'].value;
+   this.special.doctor_id = this.userId;
    
 
    if(this.special.id == undefined){
@@ -83,6 +88,7 @@ export class AsuedocDialogComponent implements OnInit {
      this.specialsService.post(this.special).subscribe(
        result => {
          this.openSnackBar("Ingresado con éxito", "Cerrar");
+         console.log(this.special);
          this.dialogRef.close();
      },
      error=>{
@@ -95,6 +101,7 @@ export class AsuedocDialogComponent implements OnInit {
         }
         if(422){
           this.openSnackBar("Hay un problema con las horas de tu horario.", "Cerrar");
+          console.log(this.special);
         }
      }
      );
@@ -103,6 +110,7 @@ export class AsuedocDialogComponent implements OnInit {
      this.specialsService.put(this.special).subscribe(
        result => {
          this.openSnackBar("Actualizado con éxito", "Cerrar");
+         console.log(this.special);
          this.dialogRef.close();
          
      },
@@ -116,6 +124,7 @@ export class AsuedocDialogComponent implements OnInit {
       }
       if(422){
         this.openSnackBar("Hay un problema con las horas de tu horario.", "Cerrar");
+        console.log(this.special);
       }
      }
      );
