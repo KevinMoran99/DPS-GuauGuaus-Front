@@ -1,7 +1,32 @@
-h3 {
-    color: #443963;
-    font-weight: normal;
-    font-size: 30px;
-    font-family: Arial;
-    text-transform: lowercase;
-  }
+.example-card {
+  max-width: 400px;
+}
+
+.cartas2{
+  max-width: 350px;
+}
+
+.example-header-image {
+  background-image: url('https://img.pngio.com/copyright-symbol-png-file-copyright-symbol-png-1600_1600.png');
+  background-size: cover;
+}
+.kevin {
+  background-image: url('https://www.udbvirtual.edu.sv/auladigital/pluginfile.php/37748/user/icon/klass/f1?rev=3202221');
+  background-size: cover;
+}
+.oscar{
+  background-image: url('https://www.udbvirtual.edu.sv/auladigital/pluginfile.php/37573/user/icon/klass/f1?rev=2363832');
+  background-size: cover;
+}
+.fernando{
+  background-image: url('https://www.udbvirtual.edu.sv/auladigital/pluginfile.php/39679/user/icon/klass/f1?rev=2854094');
+  background-size: cover;
+}
+.miguel{
+  background-image: url("../../../assets/img/miguel.jpg");
+  background-size: cover;
+}
+.german{
+  background-image: url("../../../assets/img/german.jpg");
+  background-size: cover;
+}
