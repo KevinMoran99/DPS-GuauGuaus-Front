@@ -12,6 +12,35 @@ import { CitasDialogComponent } from './citas-dialog/citas-dialog.component';
 import { ModalSettings } from '../../helpers/settings';
 import { Pet } from 'src/app/models/pet.model';
 
+import { map } from 'rxjs/operators';
+import { CalendarEvent, CalendarView } from 'angular-calendar';
+import {
+  isSameMonth,
+  isSameDay,
+  startOfMonth,
+  endOfMonth,
+  startOfWeek,
+  endOfWeek,
+  startOfDay,
+  endOfDay,
+  format,
+} from 'date-fns';
+import { Observable } from 'rxjs';
+import { colors } from '../../helpers/demo-utils/colors';
+
+
+function getTimezoneOffsetString(date: Date): string {
+  const timezoneOffset = date.getTimezoneOffset();
+  const hoursOffset = String(
+    Math.floor(Math.abs(timezoneOffset / 60))
+  ).padStart(2, '0');
+  const minutesOffset = String(Math.abs(timezoneOffset % 60)).padEnd(2, '0');
+  const direction = timezoneOffset > 0 ? '-' : '+';
+    console.log(`T00:00:00${direction}${hoursOffset}:${minutesOffset}`)
+  return `T00:00:00${direction}${hoursOffset}:${minutesOffset}`;
+}
+
+
 @Component({
   selector: 'app-citas',
   templateUrl: './citas.component.html',
@@ -31,6 +60,14 @@ export class CitasComponent implements OnInit {
   //Variables que definen el acceso del usuario
   permCreate:Boolean = false;
   permUpdate:Boolean = false;
+
+
+  view: CalendarView = CalendarView.Month;
+  viewDate: Date = new Date();
+  events$: Observable<CalendarEvent<{ appointment: Appointment }>[]>;
+  activeDayIsOpen: boolean = false;
+  locale: string = 'es';
+
 
   constructor(
     private appointmentService: AppointmentService,
@@ -69,6 +106,8 @@ export class CitasComponent implements OnInit {
           alert("Error al obtener los datos del servidor");
         }
       });
+      
+      this.updateCalendar(this.appointmentService.getAll());
   }
   getByPet(id){
     this.appointmentService.byPet(id).subscribe(
@@ -81,19 +120,83 @@ export class CitasComponent implements OnInit {
           //alert("Error al obtener los datos del servidor");
         }
       });
+
+      this.updateCalendar(this.appointmentService.byPet(id));
+  }
+
+  updateCalendar(func: Observable<Object>) {
+    this.events$ = 
+      func.pipe(
+        map((result: Appointment[]) => {
+          //color helper array
+          let doctorIds: Number[] = [];
+          return result.map((appointment: Appointment) => {
+
+            if (!doctorIds.find(x => x == appointment.doctor_id)) {
+              doctorIds.push(appointment.doctor_id);
+            }
+
+            return {
+              title: /*appointment.doctor.name + " " + appointment.doctor.lastname*/ appointment.doctor_id + ": " + 
+                    appointment.type.name + " de " + appointment.pet.name /*+  " (" + 
+                    appointment.pet.owner.name + " " + appointment.pet.owner.lastname + ")"*/ + 
+                    "  -  " + appointment.appointment_start_hour,
+              start: new Date(
+                appointment.appointment_date + "T" + appointment.appointment_start_hour
+              ),
+              allDay: false,
+              color: colors[doctorIds.findIndex(x => x == appointment.doctor_id)],
+              meta: {
+                appointment,
+              },
+            };
+          });
+        })
+      );
+  }
+
+  dayClicked({
+    date,
+    events,
+  }: {
+    date: Date;
+    events: CalendarEvent<{ appointment: Appointment }>[];
+  }): void {
+    if (isSameMonth(date, this.viewDate)) {
+      if (
+        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+        events.length === 0
+      ) {
+        this.activeDayIsOpen = false;
+      } else {
+        this.activeDayIsOpen = true;
+        this.viewDate = date;
+      }
+    }
+  }
+
+  eventClicked(event: CalendarEvent<{ appointment: Appointment }>): void {
+    this.openDialog(event.meta.appointment);
   }
 
   //opening the Add Appointment Dialog
   openDialog(appointment?: Appointment): void {
-    const dialogRef = this.dialog.open(CitasDialogComponent, ModalSettings.citasAddSettings);
-    dialogRef.componentInstance.title = ModalSettings.citasAddSettings.title;
+    const dialogRef = this.dialog.open(CitasDialogComponent, this.permUpdate ? ModalSettings.citasAddSettings : ModalSettings.citasSeeSettings);
+    if (this.permUpdate) {
+      dialogRef.componentInstance.title = ModalSettings.citasAddSettings.title;
+    }
+    else {
+      dialogRef.componentInstance.title = ModalSettings.citasSeeSettings.title;
+      dialogRef.componentInstance.readOnly = true;
+    }
     if(appointment != undefined){
       dialogRef.componentInstance.appointment = appointment;
     }
     dialogRef.afterClosed().subscribe(result => {
       dialogRef.componentInstance.isSending = false;
-      this.getAll();
+      (this.pet as Pet) ?  this.getByPet((this.pet as Pet).id) : this.getAll();
     });
   }
+
 
 }

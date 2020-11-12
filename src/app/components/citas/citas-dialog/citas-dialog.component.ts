@@ -35,6 +35,8 @@ export class CitasDialogComponent implements OnInit {
 
   minDate: Date = new Date();
 
+  readOnly: boolean = false;
+
   //columns to display in the table
   columnsToDisplay = ['day', 'start_hour', 'finish_hour'];
 
@@ -103,6 +105,12 @@ export class CitasDialogComponent implements OnInit {
       this.appointmentForm.controls['doctor_id'].setValue(this.appointment.doctor_id);
       this.appointmentForm.controls['state'].setValue(this.appointment.state ? '1' : '0');
       this.getSchedules();
+
+     
+    }
+
+    if(this.readOnly) {
+      this.appointmentForm.disable();
     }
   }
   

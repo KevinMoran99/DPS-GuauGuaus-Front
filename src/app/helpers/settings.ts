@@ -41,6 +41,12 @@ export const ModalSettings = {
         title: 'Agregar cita',
         disableClose: true
     },
+    citasSeeSettings: {
+        height: 'auto',
+        width: '800px',
+        title: 'Ver cita',
+        disableClose: true
+    },
     permissionAddSettings: {
         height: 'auto',
         width: '800px',

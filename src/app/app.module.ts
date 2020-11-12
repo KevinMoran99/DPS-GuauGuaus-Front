@@ -73,12 +73,19 @@ import { MisMascotasComponent } from './components/mis-mascotas/mis-mascotas.com
 import { DetalleMascotasComponent } from './components/detalle-mascotas/detalle-mascotas.component';
 import { AuthInterceptor } from './helpers/AuthInterceptor';
 import { CitasDialogComponent } from './components/citas/citas-dialog/citas-dialog.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { DemoUtilsModule } from './helpers/demo-utils/module';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
 
 
 //imagepicker config
 const config: InputFileConfig = {
   fileAccept: 'image/*'
 };
+
+registerLocaleData(localeEs);
 
 @NgModule({
   declarations: [
@@ -148,6 +155,8 @@ const config: InputFileConfig = {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    DemoUtilsModule
 
   ],
   providers: [

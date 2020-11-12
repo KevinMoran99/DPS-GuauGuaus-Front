@@ -2,6 +2,59 @@
     <!-- registers? -->
     <div [hidden]="!appointments">
       <h3 class="title">Citas</h3>
+
+      <!-- Calendario -->
+      <div class="calendarContainer">
+        <mwl-utils-calendar-header
+          [(view)]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="getAll()"
+          (viewChange)="getAll()"
+          [locale] = "locale"
+        >
+        </mwl-utils-calendar-header>
+
+        <ng-template #loading>
+          <div class="text-center">
+            <i class="fas fa-spin fa-spinner fa-5x"></i> <br />
+            Cargando citas...
+          </div>
+        </ng-template>
+
+        <div *ngIf="events$ | async; else loading; let events">
+          <div [ngSwitch]="view">
+            <mwl-calendar-month-view
+              *ngSwitchCase="'month'"
+              [viewDate]="viewDate"
+              [events]="events"
+              [activeDayIsOpen]="activeDayIsOpen"
+              [locale] = "locale"
+              (dayClicked)="dayClicked($event.day)"
+              (eventClicked)="eventClicked($event.event)"
+            >
+            </mwl-calendar-month-view>
+            <mwl-calendar-week-view
+              *ngSwitchCase="'week'"
+              [viewDate]="viewDate"
+              [events]="events"
+              [locale] = "locale"
+              (eventClicked)="eventClicked($event.event)"
+            >
+            </mwl-calendar-week-view>
+            <mwl-calendar-day-view
+              *ngSwitchCase="'day'"
+              [viewDate]="viewDate"
+              [events]="events"
+              [locale] = "locale"
+              (eventClicked)="eventClicked($event.event)"
+            >
+            </mwl-calendar-day-view>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fin del calendario -->
+
       <table #dataTable mat-table [dataSource]="appointments">
         <!--Name Col -->
         <ng-container matColumnDef="pet">
@@ -57,6 +110,7 @@
         <br>
       </div>
       <!--end of registers?-->
+
     </div>
     <!-- no registers -->
     
