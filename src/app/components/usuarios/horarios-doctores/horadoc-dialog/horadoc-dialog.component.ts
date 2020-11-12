@@ -20,6 +20,8 @@ export class HoradocDialogComponent implements OnInit {
   schedule = new Schedule();
   userId: number;
   isSending: boolean = false;
+  horai: String[];
+  horaf: String[];
 
   //Validating form
   scheduleForm: FormGroup = this.formBuilder.group({
@@ -55,8 +57,10 @@ export class HoradocDialogComponent implements OnInit {
     //if comes from edit
     if(this.schedule.id != undefined){
       this.scheduleForm.controls['day'].setValue(this.schedule.day);
-      this.scheduleForm.controls['start_hour'].setValue(this.schedule.start_hour);
-      this.scheduleForm.controls['finish_hour'].setValue(this.schedule.finish_hour);
+      this.horai=this.schedule.start_hour.toString().split(":");
+      this.scheduleForm.controls['start_hour'].setValue(this.horai[0]+":"+this.horai[1]);
+      this.horaf=this.schedule.finish_hour.toString().split(":");
+      this.scheduleForm.controls['finish_hour'].setValue(this.horaf[0]+":"+this.horaf[1]);
       this.scheduleForm.controls['state'].setValue(this.schedule.state ? '1' : '0');
     }
   }
@@ -71,7 +75,6 @@ export class HoradocDialogComponent implements OnInit {
     this.schedule.finish_hour = this.scheduleForm.controls['finish_hour'].value;
     this.schedule.state = this.scheduleForm.controls['state'].value;
     
-
     if(this.schedule.id == undefined){
       //post
       this.schedulesService.post(this.schedule).subscribe(
@@ -110,6 +113,7 @@ export class HoradocDialogComponent implements OnInit {
           }
           if(422){
             this.openSnackBar("Hay un problema con las horas de tu horario.", "Cerrar");
+            console.log(this.schedule);
           }
       }
       );

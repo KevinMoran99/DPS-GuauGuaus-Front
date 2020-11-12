@@ -11,15 +11,15 @@
   background-size: cover;
 }
 .kevin {
-  background-image: url('https://www.udbvirtual.edu.sv/auladigital/pluginfile.php/37748/user/icon/klass/f1?rev=3202221');
+  background-image: url('../../../assets/img/kevin.png');
   background-size: cover;
 }
 .oscar{
-  background-image: url('https://www.udbvirtual.edu.sv/auladigital/pluginfile.php/37573/user/icon/klass/f1?rev=2363832');
+  background-image: url('../../../assets/img/oscar.jpg');
   background-size: cover;
 }
 .fernando{
-  background-image: url('https://www.udbvirtual.edu.sv/auladigital/pluginfile.php/39679/user/icon/klass/f1?rev=2854094');
+  background-image: url('../../../assets/img/fernando.jpg');
   background-size: cover;
 }
 .miguel{
