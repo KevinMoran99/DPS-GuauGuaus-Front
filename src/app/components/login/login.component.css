@@ -70,6 +70,11 @@ body{
     background: #3aad5d;
     color: #fff;
 }
+.custom-btn-rgst{
+    margin-bottom: 15px;
+    background: #c7ba06d2;
+    color: #fff;
+}
 .google-icon{
     width: 6%;
 }

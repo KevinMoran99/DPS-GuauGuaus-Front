@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { auth } from 'firebase';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { UsuariosDialogComponent } from '../usuarios/usuarios-dialog/usuarios-dialog.component';
+import { ModalSettings } from '../../helpers/settings';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router:Router,
-    public authServiceFirebase: AuthService
+    public authServiceFirebase: AuthService,
+    private dialog: MatDialog
     ) { }
 
   ngOnInit(): void {
@@ -25,6 +29,17 @@ export class LoginComponent implements OnInit {
 
   login() {
   this.authService.login(this.email, this.password)
+  }
+
+  
+  //opening the Add User Dialog
+  openDialog(): void {
+    const dialogRef = this.dialog.open(UsuariosDialogComponent, ModalSettings.perfilUpdateSettings);
+    dialogRef.componentInstance.title = ModalSettings.perfilUpdateSettings.title;
+    dialogRef.componentInstance.isRegisterUser = true;
+    dialogRef.afterClosed().subscribe(result => {
+      dialogRef.componentInstance.isSending = false;
+    });
   }
 
 }

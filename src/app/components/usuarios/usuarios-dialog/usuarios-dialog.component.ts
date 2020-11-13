@@ -21,6 +21,9 @@ export class UsuariosDialogComponent implements OnInit {
   user = new User();
   isSending: boolean = false;
 
+  isRegisterUser = false;
+  isEditProfile = false;
+
   //Validating form
   userForm: FormGroup = this.formBuilder.group({
     name: [, { validators: [Validators.required, Validators.minLength(3), Validators.maxLength(50)], updateOn: "change" }],
@@ -31,8 +34,8 @@ export class UsuariosDialogComponent implements OnInit {
     dui: [, {validators: [Validators.required]}],
     address: [, {validators: [Validators.required, Validators.minLength(5)]}],
     phone: [, {validators: [Validators.required]}],
-    type_user_id: [, {validators: [Validators.required]}],
-    state: ["1", {validators: [Validators.required]}],
+    type_user_id: [, {validators: []}],
+    state: ["1", {validators: []}],
   });
 
   userTypes: UserType[];
@@ -99,29 +102,72 @@ export class UsuariosDialogComponent implements OnInit {
       return;
     }
 
+    //Validando que se haya ingresado el tipo y estado (no se valida con Validators porque esta
+    //validación no aplica para register)
+    if (!(this.isRegisterUser)) {
+      if (this.userForm.controls['type_user_id'].value == null) {
+        this.openSnackBar("Debe proporcionar un tipo de usuario", "Cerrar");
+        this.isSending = false;
+        return;
+      }
+      if (this.userForm.controls['state'].value == null) {
+        this.openSnackBar("Debe proporcionar un estado", "Cerrar");
+        this.isSending = false;
+        return;
+      }
+    }
+
     if(this.user.id == undefined){
       //post
-      this.usersService.post(this.user).subscribe(
-        result => {
-          this.openSnackBar("Ingresado con éxito", "Cerrar");
-          this.dialogRef.close();
-      },
-      error=>{
-        this.openSnackBar("Ocurrió un error al ingresar el usuario", "Cerrar");
+      if (this.isRegisterUser) {
+        this.usersService.register(this.user).subscribe(
+          result => {
+            this.openSnackBar("Te has registrado! Ahora, inicia sesión.", "Cerrar");
+            this.dialogRef.close();
+        },
+        error=>{
+          this.openSnackBar("Ocurrió un error al ingresar el usuario", "Cerrar");
+        }
+        );
       }
-      );
+      else {
+        this.usersService.post(this.user).subscribe(
+          result => {
+            this.openSnackBar("Ingresado con éxito", "Cerrar");
+            this.dialogRef.close();
+        },
+        error=>{
+          this.openSnackBar("Ocurrió un error al ingresar el usuario", "Cerrar");
+        }
+        );
+      }
     }else{
       //put
-      this.usersService.put(this.user).subscribe(
-        result => {
-          this.openSnackBar("Actualizado con éxito", "Cerrar");
-          this.dialogRef.close();
-          
-      },
-      error=>{
-        this.openSnackBar("Ocurrio un error al actualizar el usuario", "Cerrar");
+      if (this.isEditProfile) {
+        this.usersService.updateProfile(this.user).subscribe(
+          result => {
+            this.openSnackBar("Actualizado con éxito", "Cerrar");
+            this.dialogRef.close();
+            
+        },
+        error=>{
+          this.openSnackBar("Ocurrio un error al actualizar el usuario", "Cerrar");
+        }
+        );  
       }
-      );
+      else {
+        
+        this.usersService.put(this.user).subscribe(
+          result => {
+            this.openSnackBar("Actualizado con éxito", "Cerrar");
+            this.dialogRef.close();
+            
+        },
+        error=>{
+          this.openSnackBar("Ocurrio un error al actualizar el usuario", "Cerrar");
+        }
+        );
+      }
     }
   }
   //exit the modal

@@ -4,27 +4,31 @@
   <mat-dialog-content>
       <mat-form-field appearance="fill">
         <mat-label>Mascota</mat-label>
-        <mat-select formControlName="pet_id">
+        <mat-select formControlName="pet_id" *ngIf="!readOnly">
           <mat-option *ngFor="let pet of pets" [value]="pet.id">
             {{pet.name + " (" + pet.owner.name + " " + pet.owner.lastname + ")"}}
           </mat-option>
         </mat-select>
+        <input matInput type="text" [disabled]="true" *ngIf="readOnly" 
+        [value]="appointment.pet.name + ' (' + appointment.pet.owner.name + ' ' + appointment.pet.owner.lastname + ')'">
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Tipo de cita</mat-label>
-        <mat-select formControlName="type_id">
+        <mat-select formControlName="type_id" *ngIf="!readOnly">
           <mat-option *ngFor="let type of types" [value]="type.id">
             {{type.name}}
           </mat-option>
         </mat-select>
+        <input matInput type="text" [disabled]="true" *ngIf="readOnly" [value]="appointment.type.name">
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Doctor</mat-label>
-        <mat-select formControlName="doctor_id" (ngModelChange)="getSchedules()">
+        <mat-select formControlName="doctor_id" (ngModelChange)="getSchedules()" *ngIf="!readOnly">
           <mat-option *ngFor="let doctor of doctors" [value]="doctor.id">
             {{doctor.name + " " + doctor.lastname}}
           </mat-option>
         </mat-select>
+        <input matInput type="text" [disabled]="true" *ngIf="readOnly" [value]="appointment.doctor.name + ' ' + appointment.doctor.lastname">
       </mat-form-field>
 
       <!--Horarios del doctor-->
@@ -41,7 +45,7 @@
           </ng-container>
           <ng-container matColumnDef="finish_hour">
               <th mat-header-cell *matHeaderCellDef>Hora fin</th>
-              <td mat-cell *matCellDef="let item">{{item.end_hour}} </td>
+              <td mat-cell *matCellDef="let item">{{item.finish_hour}} </td>
             </ng-container>
         
           <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>

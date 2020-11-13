@@ -11,7 +11,7 @@
           <!--Name Col -->
             <ng-container matColumnDef="day">
               <th mat-header-cell *matHeaderCellDef>Dia</th>
-              <td mat-cell *matCellDef="let item">{{item.day | date:'EEEE, MMMM d, y'}} </td>
+              <td mat-cell *matCellDef="let item">{{datePipe.transform(item.day,"dd/MM/yyyy")}}</td>
             </ng-container>
             <!--Name Col -->
             <ng-container matColumnDef="start_hour">

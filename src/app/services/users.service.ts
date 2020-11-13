@@ -25,8 +25,16 @@ export class UsersService {
     return this.http.post(environment.baseUrl+this.endpoint,user);
   }
 
+  register(user: User) {
+    return this.http.post(environment.baseUrl+'register',user);
+  }
+
   put(user: User){
     return this.http.put(environment.baseUrl+this.endpoint,user);
+  }
+  
+  updateProfile(user: User){
+    return this.http.post(environment.baseUrl+'updateProfile',user);
   }
 
   login(user: User){

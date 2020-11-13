@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -14,7 +15,8 @@ import { AsuedocDialogComponent } from './asuedoc-dialog/asuedoc-dialog.componen
 @Component({
   selector: 'app-asuetos-doctores',
   templateUrl: './asuetos-doctores.component.html',
-  styleUrls: ['./asuetos-doctores.component.css']
+  styleUrls: ['./asuetos-doctores.component.css'],
+  providers:[DatePipe]
 })
 export class AsuetosDoctoresComponent implements OnInit {
 
@@ -35,7 +37,8 @@ export class AsuetosDoctoresComponent implements OnInit {
     private usersService: UsersService,
     private specialsService: SpecialsService,
     private _snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public datePipe: DatePipe
   ) { }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;

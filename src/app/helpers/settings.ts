@@ -17,6 +17,18 @@ export const ModalSettings = {
         title: 'Agregar usuario',
         disableClose: true
     },
+    registerSettings: {
+        height: 'auto',
+        width: '800px',
+        title: 'Registrarse al sistema',
+        disableClose: true
+    },
+    perfilUpdateSettings: {
+        height: 'auto',
+        width: '800px',
+        title: 'Actualizar información',
+        disableClose: true
+    },
     condicionMedicaAddSettings: {
         height: 'auto',
         width: '800px',

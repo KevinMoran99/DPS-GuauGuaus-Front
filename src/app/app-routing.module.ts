@@ -32,6 +32,7 @@ const routes: Routes = [
       {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
       {path: 'mascotas', component: MascotasComponent, canActivate: [AuthGuard]},
       {path: 'citas', component: CitasComponent, canActivate: [AuthGuard]},
+      {path: 'citas/:doctorId', component: CitasComponent, canActivate: [AuthGuard]},
       {path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard]},
       {path: 'permisos', component: PermisosComponent, canActivate: [AuthGuard]},
       {path: 'permisos/:typeId', component: PermisosComponent, canActivate: [AuthGuard]},

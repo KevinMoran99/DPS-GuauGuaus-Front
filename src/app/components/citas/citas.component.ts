@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Appointment } from '../../models/appointment.model';
 import { User } from 'src/app/models/user.model';
+import { ActivatedRoute } from '@angular/router';
 //from here we get the data
 import { AppointmentService } from '../../services/appointment.service';
 import { CitasDialogComponent } from './citas-dialog/citas-dialog.component';
@@ -61,6 +62,9 @@ export class CitasComponent implements OnInit {
   permCreate:Boolean = false;
   permUpdate:Boolean = false;
 
+  //id de doctor, si es la vista de citas por doctor
+  doctorId: number;
+
 
   view: CalendarView = CalendarView.Month;
   viewDate: Date = new Date();
@@ -72,7 +76,8 @@ export class CitasComponent implements OnInit {
   constructor(
     private appointmentService: AppointmentService,
     private dialog: MatDialog,
-    public datePipe: DatePipe) { }
+    public datePipe: DatePipe,
+    private route: ActivatedRoute,) { }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -91,7 +96,12 @@ export class CitasComponent implements OnInit {
       }
     } catch{}
 
-    (this.pet as Pet) ?  this.getByPet((this.pet as Pet).id) : this.getAll();
+    this.route.paramMap.subscribe(params => {
+      this.doctorId = +params.get('doctorId');
+    });
+
+
+    this.updateData();
     
   }
 
@@ -107,7 +117,7 @@ export class CitasComponent implements OnInit {
         }
       });
       
-      this.updateCalendar(this.appointmentService.getAll());
+      this.updateCalendar(this.appointmentService.getActive());
   }
   getByPet(id){
     this.appointmentService.byPet(id).subscribe(
@@ -123,6 +133,37 @@ export class CitasComponent implements OnInit {
 
       this.updateCalendar(this.appointmentService.byPet(id));
   }
+  
+  getByDoctor(id){
+    this.appointmentService.byDoctor(id).subscribe(
+      result => {
+        console.log(result);
+        this.appointments = new MatTableDataSource<Appointment>(result as Appointment[]);
+        this.appointments.paginator = this.paginator;
+        console.log(this.appointments);
+      }, error=>{
+        if(error.status == 404){
+          //alert("Error al obtener los datos del servidor");
+        }
+      });
+
+      this.updateCalendar(this.appointmentService.byDoctor(id));
+  }
+
+  updateData() {
+    if (this.pet as Pet) {
+      alert()
+      this.getByPet((this.pet as Pet).id)
+    }  
+    else {
+      if (this.doctorId != undefined && this.doctorId != 0) {
+        this.getByDoctor(this.doctorId);
+      }
+      else {
+        this.getAll();
+      }
+    }
+  }
 
   updateCalendar(func: Observable<Object>) {
     this.events$ = 
@@ -137,9 +178,9 @@ export class CitasComponent implements OnInit {
             }
 
             return {
-              title: /*appointment.doctor.name + " " + appointment.doctor.lastname*/ appointment.doctor_id + ": " + 
-                    appointment.type.name + " de " + appointment.pet.name /*+  " (" + 
-                    appointment.pet.owner.name + " " + appointment.pet.owner.lastname + ")"*/ + 
+              title: appointment.doctor.name + " " + appointment.doctor.lastname + ": " + 
+                    appointment.type.name + " de " + appointment.pet.name +  " (" + 
+                    appointment.pet.owner.name + " " + appointment.pet.owner.lastname + ")" + 
                     "  -  " + appointment.appointment_start_hour,
               start: new Date(
                 appointment.appointment_date + "T" + appointment.appointment_start_hour
@@ -194,7 +235,7 @@ export class CitasComponent implements OnInit {
     }
     dialogRef.afterClosed().subscribe(result => {
       dialogRef.componentInstance.isSending = false;
-      (this.pet as Pet) ?  this.getByPet((this.pet as Pet).id) : this.getAll();
+      this.updateData();
     });
   }
 

@@ -32,7 +32,7 @@
                 <textarea matInput formControlName="address"></textarea>
             </mat-form-field>
             <br>
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="fill" *ngIf="!(isRegisterUser || isEditProfile)">
                 <mat-label>Tipo de usuario</mat-label>
                 <mat-select formControlName="type_user_id">
                     <mat-option *ngFor="let type of userTypes" [value]="type.id">
@@ -51,7 +51,7 @@
                 <input type="password" matInput formControlName="passwordConfirm">
             </mat-form-field>
             <br>
-            <mat-radio-group formControlName="state">
+            <mat-radio-group formControlName="state" *ngIf="!(isRegisterUser || isEditProfile)">
               <label>Estado: </label>
               <mat-radio-button value="1" checked>Activo</mat-radio-button>
               <mat-radio-button value="0">Inactivo</mat-radio-button>

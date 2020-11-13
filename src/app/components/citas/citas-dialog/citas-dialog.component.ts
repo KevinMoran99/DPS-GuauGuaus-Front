@@ -186,7 +186,7 @@ export class CitasDialogComponent implements OnInit {
           this.openSnackBar('El doctor seleccionado no tiene horarios asignados.', 'Cerrar');
         }
         else {
-          alert('Ocurrió un error inesperado.');
+          //alert('Ocurrió un error inesperado.');
         }
       });
     }

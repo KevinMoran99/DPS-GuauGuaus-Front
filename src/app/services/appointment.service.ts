@@ -26,6 +26,10 @@ export class AppointmentService {
     this.modifier = "/pet/";
     return this.http.get(environment.baseUrl+this.endpoint+this.modifier+id);
   }
+  byDoctor(id: Number){
+    this.modifier = "/doctor/";
+    return this.http.get(environment.baseUrl+this.endpoint+this.modifier+id);
+  }
   
   post(appointment: Appointment) {
     return this.http.post(environment.baseUrl+this.endpoint,appointment);

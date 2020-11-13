@@ -71,7 +71,8 @@ export class MascotasDialogComponent implements OnInit {
     if(!this.client){
       this.usersService.getActive().subscribe(
         result => {
-          this.users = result as User[];
+          let array = result as User[];
+          this.users = array.filter(x => x.type_user_id == 3);
         }, error=>{
           if(error.status == 404){
             alert("Error al obtener los datos de usuarios del servidor");

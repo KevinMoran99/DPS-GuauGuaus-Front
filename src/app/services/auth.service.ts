@@ -47,10 +47,14 @@ export class AuthService {
 
   login(email: string, password: string) {
     this.http.post(this.uri + '/login', {email: email,password: password}).subscribe(
-      (resp: any) => {
+      (resp: User) => {
       this.loggedIn.next(true);
       this.location.replaceState('/');
       this.router.navigate(['']);
+      //truncando permisos inactivos
+      let perms = resp.permission.filter(x => x.state);
+      resp.permission = perms;
+
       localStorage.setItem('auth', JSON.stringify(resp));
       console.log(resp);
       },
