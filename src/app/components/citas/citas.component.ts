@@ -152,7 +152,6 @@ export class CitasComponent implements OnInit {
 
   updateData() {
     if (this.pet as Pet) {
-      alert()
       this.getByPet((this.pet as Pet).id)
     }  
     else {
